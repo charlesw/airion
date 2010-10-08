@@ -1,0 +1,421 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Prebuild xmlns="http://dnpb.sourceforge.net/schemas/prebuild-1.9.xsd">
+	<Solution name="Airion" activeConfig="Debug">
+		<Configuration name="Debug" platform="x86">
+			<Options>
+				<CompilerDefines>DEBUG;TRACE;</CompilerDefines>
+				<OutputPath>./bin/Debug</OutputPath>
+				<OptimizeCode>false</OptimizeCode>
+				<DebugInformation>true</DebugInformation>
+			</Options>
+		</Configuration>
+		<Configuration name="Release" platform="x86">
+			<Options>
+				<CompilerDefines>TRACE;</CompilerDefines>
+				<OutputPath>./bin/Release</OutputPath>
+				<OptimizeCode>true</OptimizeCode>
+				<DebugInformation>false</DebugInformation>
+			</Options>
+		</Configuration>
+		
+		<!-- Main -->
+		<EmbeddedSolution name="Main">
+			<Configuration name="Debug" platform="x86">
+				<Options>
+					<CompilerDefines>DEBUG;TRACE;</CompilerDefines>
+					<OutputPath>../../../Binaries/Debug</OutputPath>
+					<OptimizeCode>false</OptimizeCode>
+					<DebugInformation>true</DebugInformation>
+				</Options>
+			</Configuration>
+			<Configuration name="Release" platform="x86">
+				<Options>
+					<CompilerDefines>TRACE;</CompilerDefines>
+					<OutputPath>../../../Binaries/Release</OutputPath>
+					<OptimizeCode>true</OptimizeCode>
+					<DebugInformation>false</DebugInformation>
+				</Options>
+			</Configuration>
+			
+			<!-- Airion.Common -->
+			<Project name="Airion.Common"
+			         path="Main/Airion.Common"
+			         assemblyName="Airion.Common"
+			         rootNamespace="Airion"
+			         language="C#"
+			         type="Library"
+			         frameworkVersion="v4_0">
+				
+				<Configuration name="Debug" platform="x86">
+					<Options>
+						<AllowUnsafe>true</AllowUnsafe>
+					</Options>
+				</Configuration>
+				<Configuration name="Release" platform="x86">
+					<Options>
+						<AllowUnsafe>true</AllowUnsafe>
+					</Options>
+				</Configuration>
+				
+				<Reference name="System"/>
+				<Reference name="System.Core"/>
+				<Reference name="System.Data" />				
+				
+				<Files>
+					<Match buildAction="Compile" pattern="*.cs" recurse="true"/>
+				</Files>
+			</Project>
+						
+			<!-- Airion.Persist -->
+			<Project name="Airion.Persist"
+			         path="Main/Airion.Persist"
+			         assemblyName="Airion.Persist"
+			         language="C#"
+			         type="Library"
+			         frameworkVersion="v4_0">
+				
+				<Configuration name="Debug" platform="x86">
+					<Options>
+						<AllowUnsafe>true</AllowUnsafe>
+					</Options>
+				</Configuration>
+				<Configuration name="Release" platform="x86">
+					<Options>
+						<AllowUnsafe>true</AllowUnsafe>
+					</Options>
+				</Configuration>
+				
+				<Reference name="System"/>
+				<Reference name="System.Core"/>
+				<Reference name="System.Data" />		
+				
+				<Reference name="Airion.Common" localCopy="true" />	
+				
+				<Files>
+					<Match buildAction="Compile" pattern="*.cs" recurse="true"/>
+				</Files>
+			</Project>
+			
+			<!-- Airion.Persist.TransientProvider -->
+			<Project name="Airion.Persist.TransientProvider"
+			         path="Main/Airion.Persist.TransientProvider"
+			         assemblyName="Airion.Persist.TransientProvider"
+			         language="C#"
+			         type="Library"
+			         frameworkVersion="v4_0">
+				
+				<Configuration name="Debug" platform="x86">
+					<Options>
+						<AllowUnsafe>true</AllowUnsafe>
+					</Options>
+				</Configuration>
+				<Configuration name="Release" platform="x86">
+					<Options>
+						<AllowUnsafe>true</AllowUnsafe>
+					</Options>
+				</Configuration>
+				
+				<Reference name="System"/>
+				<Reference name="System.Core"/>
+				<Reference name="System.Data" />		
+								
+				<Reference name="Airion.Common" localCopy="true" />	
+				<Reference name="Airion.Persist" localCopy="true" />	
+				
+				<Files>
+					<Match buildAction="Compile" pattern="*.cs" recurse="true"/>
+				</Files>
+			</Project>
+			
+			<!-- Airion.Persist.NHibernateProvider -->
+			<Project name="Airion.Persist.NHibernateProvider"
+			         path="Main/Airion.Persist.NHibernateProvider"
+			         assemblyName="Airion.Persist.NHibernateProvider"
+			         language="C#"
+			         type="Library"
+			         frameworkVersion="v4_0">
+				
+				<Configuration name="Debug" platform="x86">
+					<Options>
+						<AllowUnsafe>true</AllowUnsafe>
+					</Options>
+				</Configuration>
+				<Configuration name="Release" platform="x86">
+					<Options>
+						<AllowUnsafe>true</AllowUnsafe>
+					</Options>
+				</Configuration>
+				
+				<Reference name="System"/>
+				<Reference name="System.Core"/>
+				<Reference name="System.Data" />	
+							
+				<Reference name="FluentNHibernate" path="../../Libraries/FluentNHibernate" localCopy="true" />
+				<Reference name="NHibernate" path="../../Libraries/FluentNHibernate" localCopy="true" />
+				<Reference name="NHibernate.Linq" path="../../Libraries/FluentNHibernate" localCopy="true" />
+				<Reference name="NHibernate.ByteCode.Castle" path="../../Libraries/FluentNHibernate" localCopy="true" />
+				<Reference name="System.Data.SQLite" path="../../Libraries/SQLite" localCopy="true" />
+				
+				<Reference name="Airion.Common" localCopy="true" />	
+				<Reference name="Airion.Persist" localCopy="true" />	
+				
+				<Files>
+					<Match buildAction="Compile" pattern="*.cs" recurse="true"/>
+				</Files>
+			</Project>
+			
+			<!-- Airion.MVC -->
+			<Project name="Airion.MVC"
+			         path="Main/Airion.MVC"
+			         assemblyName="Airion.MVC"
+			         language="C#"
+			         type="Library"
+			         frameworkVersion="v4_0">
+				
+				<Configuration name="Debug" platform="x86">
+					<Options>
+						<AllowUnsafe>true</AllowUnsafe>
+					</Options>
+				</Configuration>
+				<Configuration name="Release" platform="x86">
+					<Options>
+						<AllowUnsafe>true</AllowUnsafe>
+					</Options>
+				</Configuration>
+				
+				<Reference name="System"/>
+				<Reference name="System.Core"/>
+				<Reference name="System.Data" />	
+				
+				<Reference name="Airion.Common" localCopy="true" />		
+				
+				<Files>
+					<Match buildAction="Compile" pattern="*.cs" recurse="true"/>
+				</Files>
+			</Project>
+			
+			<!-- Airion.Testing -->
+			<Project name="Airion.Testing"
+			         path="Main/Airion.Testing"
+			         assemblyName="Airion.Testing"
+			         language="C#"
+			         type="Library"
+			         frameworkVersion="v4_0">
+				
+				<Configuration name="Debug" platform="x86">
+					<Options>
+						<AllowUnsafe>true</AllowUnsafe>
+					</Options>
+				</Configuration>
+				<Configuration name="Release" platform="x86">
+					<Options>
+						<AllowUnsafe>true</AllowUnsafe>
+					</Options>
+				</Configuration>
+				
+				<Reference name="System"/>
+				<Reference name="System.Core"/>
+				<Reference name="System.Data" />	
+				
+				<Reference name="Airion.Common" localCopy="true" />			
+				
+				<Files>
+					<Match buildAction="Compile" pattern="*.cs" recurse="true"/>
+				</Files>
+			</Project>
+			
+			<!-- Files -->
+			<EmbeddedSolution name="Files">
+				<Files>
+					<File>../Airion.proj</File>
+					<File>./Airion.prebuild.xml</File>
+				</Files>
+			</EmbeddedSolution>
+		</EmbeddedSolution>
+		
+		<!-- Tests -->
+		<EmbeddedSolution name="Tests">
+			<Configuration name="Debug" platform="x86">
+				<Options>
+					<CompilerDefines>DEBUG;TRACE;</CompilerDefines>
+					<OutputPath>../../../Test Binaries/Debug</OutputPath>
+					<OptimizeCode>false</OptimizeCode>
+					<DebugInformation>true</DebugInformation>
+				</Options>
+			</Configuration>
+			<Configuration name="Release" platform="x86">
+				<Options>
+					<CompilerDefines>TRACE;</CompilerDefines>
+					<OutputPath>../../../Test Binaries/Release</OutputPath>
+					<OptimizeCode>true</OptimizeCode>
+					<DebugInformation>false</DebugInformation>
+				</Options>
+			</Configuration>
+			
+			<!-- Airion.Common.Tests -->
+			<Project name="Airion.Common.Tests"
+			         rootNamespace="Airion"
+			         path="./Tests/Airion.Common.Tests"
+			         language="C#"
+			         type="Library"
+			         frameworkVersion="v4_0">
+				<Reference name="System"/>
+				<Reference name="System.Core"/>
+				<Reference name="System.Data" />
+				
+				<Reference name="Gallio" path="../../Libraries/Gallio" localCopy="true" />
+				<Reference name="nunit.framework" path="../../Libraries/NUnit" localCopy="true" />
+				<Reference name="TechTalk.SpecFlow" path="../../Libraries/SpecFlow" localCopy="true" />
+				<Reference name="Moq" path="../../Libraries/Moq" localCopy="true" />
+				
+				<Reference name="Airion.Common" localCopy="true" />
+				<Reference name="Airion.Testing" localCopy="true" />
+				
+				<Files>
+					<Match buildAction="Compile" pattern="*.cs" recurse="true"/>
+				</Files>
+			</Project>
+			
+			<!-- Airion.Persist.Tests -->
+			<Project name="Airion.Persist.Tests"
+			         path="./Tests/Airion.Persist.Tests"
+			         language="C#"
+			         type="Library"
+			         frameworkVersion="v4_0">
+				<Reference name="System"/>
+				<Reference name="System.Core"/>
+				<Reference name="System.Data" />
+				
+				<Reference name="Gallio" path="../../Libraries/Gallio" localCopy="true" />
+				<Reference name="nunit.framework" path="../../Libraries/NUnit" localCopy="true" />
+				<Reference name="TechTalk.SpecFlow" path="../../Libraries/SpecFlow" localCopy="true" />
+				<Reference name="Moq" path="../../Libraries/Moq" localCopy="true" />
+				
+				<Reference name="Airion.Common" localCopy="true" />
+				<Reference name="Airion.Domain" localCopy="true" />
+				<Reference name="Airion.Persistence" localCopy="true" />
+				<Reference name="Airion.Testing" localCopy="true" />
+				
+				<Files>
+					<Match buildAction="Compile" pattern="*.cs" recurse="true"/>
+				</Files>
+			</Project>
+			
+			
+			<!-- Airion.Persist.TransientProvider.Tests -->
+			<Project name="Airion.Persist.TransientProvider.Tests"
+			         path="./Tests/Airion.Persist.TransientProvider.Tests"
+			         language="C#"
+			         type="Library"
+			         frameworkVersion="v4_0">
+				<Reference name="System"/>
+				<Reference name="System.Core"/>
+				<Reference name="System.Data" />
+				
+				<Reference name="Gallio" path="../../Libraries/Gallio" localCopy="true" />
+				<Reference name="nunit.framework" path="../../Libraries/NUnit" localCopy="true" />
+				<Reference name="TechTalk.SpecFlow" path="../../Libraries/SpecFlow" localCopy="true" />
+				<Reference name="Moq" path="../../Libraries/Moq" localCopy="true" />
+				
+				<Reference name="Airion.Common" localCopy="true" />
+				<Reference name="Airion.Persist" localCopy="true" />
+				<Reference name="Airion.Persist.TransientProvider" localCopy="true" />
+				<Reference name="Airion.Testing" localCopy="true" />
+				
+				<Files>
+					<Match buildAction="Compile" pattern="*.cs" recurse="true"/>
+				</Files>
+			</Project>
+			
+			<!-- Airion.Persist.NHibernateProvider.Tests -->
+			<Project name="Airion.Persist.NHibernateProvider.Tests"
+			         path="./Tests/Airion.Persist.NHibernateProvider.Tests"
+			         language="C#"
+			         type="Library"
+			         frameworkVersion="v4_0">
+				<Reference name="System"/>
+				<Reference name="System.Core"/>
+				<Reference name="System.Data" />
+								
+				<Reference name="FluentNHibernate" path="../../Libraries/FluentNHibernate" localCopy="true" />
+				<Reference name="NHibernate" path="../../Libraries/FluentNHibernate" localCopy="true" />
+				<Reference name="NHibernate.Linq" path="../../Libraries/FluentNHibernate" localCopy="true" />
+				<Reference name="NHibernate.ByteCode.Castle" path="../../Libraries/FluentNHibernate" localCopy="true" />
+				<Reference name="System.Data.SQLite" path="../../Libraries/SQLite" localCopy="true" />
+				
+				<Reference name="Gallio" path="../../Libraries/Gallio" localCopy="true" />
+				<Reference name="nunit.framework" path="../../Libraries/NUnit" localCopy="true" />
+				<Reference name="TechTalk.SpecFlow" path="../../Libraries/SpecFlow" localCopy="true" />
+				<Reference name="Moq" path="../../Libraries/Moq" localCopy="true" />
+				
+				<Reference name="Airion.Common" localCopy="true" />
+				<Reference name="Airion.Persist" localCopy="true" />
+				<Reference name="Airion.Persist.NHibernateProvider" localCopy="true" />
+				<Reference name="Airion.Testing" localCopy="true" />
+				
+				<Files>
+					<Match buildAction="Compile" pattern="*.cs" recurse="true"/>
+				</Files>
+			</Project>
+			
+			<!-- Airion.MVC.Tests -->
+			<Project name="Airion.MVC.Tests"
+			         path="./Tests/Airion.MVC.Tests"
+			         language="C#"
+			         type="Library"
+			         frameworkVersion="v4_0">
+				<Reference name="System"/>
+				<Reference name="System.Core"/>
+				<Reference name="System.Data" />
+				
+				<Reference name="Gallio" path="../../Libraries/Gallio" localCopy="true" />
+				<Reference name="nunit.framework" path="../../Libraries/NUnit" localCopy="true" />
+				<Reference name="TechTalk.SpecFlow" path="../../Libraries/SpecFlow" localCopy="true" />
+				<Reference name="Moq" path="../../Libraries/Moq" localCopy="true" />
+				
+				<Reference name="Airion.Common" localCopy="true" />
+				<Reference name="Airion.MVC" localCopy="true" />
+				<Reference name="Airion.Testing" localCopy="true" />
+				
+				<Files>
+					<Match buildAction="Compile" pattern="*.cs" recurse="true"/>
+				</Files>
+			</Project>
+						
+			<!-- Airion.TestRunner -->
+			<Project name="Airion.TestRunner"
+			         path="./Tests/Airion.TestRunner"
+			         rootNamespace="Airion.TestRunner"
+			         language="C#"
+			         type="Exe"
+			         frameworkVersion="v4_0">
+				
+				<Reference name="System"/>
+				<Reference name="System.Core" />
+				<Reference name="System.Data" />
+				
+				<Reference name="Gallio" path="../../Libraries/Gallio" localCopy="true" />
+				<Reference name="nunit.framework" path="../../Libraries/NUnit" localCopy="true" />
+				<Reference name="TechTalk.SpecFlow" path="../../Libraries/SpecFlow" localCopy="true" />
+				<Reference name="Moq" path="../../Libraries/Moq" localCopy="true" />
+				
+				<Reference name="Airion.Common" localCopy="true"/>
+				<Reference name="Airion.Persist" localCopy="true"/>
+				<Reference name="Airion.Persist.TransientProvider" localCopy="true"/>
+				<Reference name="Airion.Persist.NHibernateProvider" localCopy="true"/>
+				<Reference name="Airion.MVC" localCopy="true"/>
+				<Reference name="Airion.Testing" localCopy="true"/>
+				
+				<Reference name="Airion.Common.Tests" localCopy="true"/>
+				<Reference name="Airion.Persist.Tests" localCopy="true"/>
+				<Reference name="Airion.Persist.TransientProvider.Tests" localCopy="true"/>
+				<Reference name="Airion.Persist.NHibernateProvider.Tests" localCopy="true"/>
+				<Reference name="Airion.MVC.Tests" localCopy="true"/>
+				
+				<Files>
+					<Match buildAction="Compile" pattern="*.cs" recurse="true"/>
+				</Files>
+			</Project>
+		</EmbeddedSolution>
+	</Solution>
+</Prebuild>

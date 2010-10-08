@@ -1,0 +1,78 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="RunTests" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+	<UsingTask AssemblyFile="C:\Program Files\Gallio\bin\Gallio.MSBuildTasks.dll" TaskName="Gallio" />
+	<PropertyGroup>
+		<NoWarn Condition="'$(NoWarn)'!=''">$(NoWarn),</NoWarn>
+		<NoWarn>$(NoWarn)MSB4078</NoWarn>
+		<Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+		<Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+		<SourceDirectory>$(MSBuildProjectDirectory)\Source</SourceDirectory>
+		<ApplicationOutputDirectory>$(MSBuildProjectDirectory)\Binaries</ApplicationOutputDirectory>
+		<TestBinOutputDirectory>$(MSBuildProjectDirectory)\Test Binaries</TestBinOutputDirectory>
+		<TestResultsDirectory>$(MSBuildProjectDirectory)\Test Results</TestResultsDirectory>
+		
+		<PrebuildProgram>"$(MSBuildProjectDirectory)\Tools\Prebuild.exe"</PrebuildProgram>
+		<!-- Common Properties -->
+	</PropertyGroup>
+	<ItemGroup>
+		<!-- Collections -->
+		<PrebuildFile Include="$(SourceDirectory)\Airion.Prebuild.xml" />
+		
+		<ProjectDirectories Include="$(SourceDirectory)\Main\Airion.Common\" />
+		<ProjectDirectories Include="$(SourceDirectory)\Main\Airion.Persist\" />
+		<ProjectDirectories Include="$(SourceDirectory)\Main\Airion.Persist.TransientProvider\" />
+		<ProjectDirectories Include="$(SourceDirectory)\Main\Airion.Persist.NHibernateProvider\" />
+		<ProjectDirectories Include="$(SourceDirectory)\Main\Airion.MVC\" />
+		<ProjectDirectories Include="$(SourceDirectory)\Main\Airion.Testing\" />
+	
+		<ProjectDirectories Include="$(SourceDirectory)\Tests\Airion.Common.Tests\" />
+		<ProjectDirectories Include="$(SourceDirectory)\Tests\Airion.Persist.Tests\" />
+		<ProjectDirectories Include="$(SourceDirectory)\Tests\Airion.Persist.TransientProvider.Tests\" />
+		<ProjectDirectories Include="$(SourceDirectory)\Tests\Airion.Persist.NHibernateProvider.Tests\" />
+		<ProjectDirectories Include="$(SourceDirectory)\Tests\Airion.MVC.Tests\" />
+		<ProjectDirectories Include="$(SourceDirectory)\Tests\Airion.Testing.Tests\" />
+	</ItemGroup>
+	<Target Name="Clean">
+		<!-- Clean Tasks -->
+		<Exec Command="$(PrebuildProgram) /clean vs2010 /file &quot;@(PrebuildFile)&quot; /yes" WorkingDirectory="$(SourceDirectory)" />
+		
+		<Message Text="Removing project obj and bin directories" />
+		<RemoveDir Directories="@(ProjectDirectories->'%(rootdir)%(directory)bin')" />
+		<RemoveDir Directories="@(ProjectDirectories->'%(rootdir)%(directory)obj')" />
+		<RemoveDir Directories="$(ApplicationOutputDirectory)" />
+		<RemoveDir Directories="$(TestBinOutputDirectory)" />
+		<RemoveDir Directories="$(TestResultsDirectory)" />
+	</Target>
+	<Target Name="Prebuild" DependsOnTargets="Clean">
+		<Exec Command="$(PrebuildProgram) /target vs2010 /file &quot;@(PrebuildFile)&quot; /yes" WorkingDirectory="$(SourceDirectory)" />
+		<CreateItem Include="$(SourceDirectory)\Airion.sln;">
+			<Output ItemName="Solution" TaskParameter="Include"/>
+		</CreateItem>
+	</Target>
+	<Target Name="Build" DependsOnTargets="Prebuild">
+		<!-- Build Tasks -->
+		<MSBuild Projects="@(Solution)" Targets="Build"  Properties="Configuration=$(Configuration)"/>
+		
+		<CreateItem Include="$(ApplicationOutputDirectory)\Airion.Tests\$(Configuration)\**\*.Tests.dll;">
+			<Output ItemName="TestAssemblies" TaskParameter="Include"/>
+		</CreateItem>
+	</Target>
+	<Target Name="RunUnitTests" DependsOnTargets="Build">
+		<!-- Run tests -->		
+		<MakeDir Directories="$(TestResultsDirectory)\Airion.Tests" />
+		<Gallio 
+			IgnoreFailures="true" 
+			Files="@(TestAssemblies)"
+			ReportDirectory="$(TestResultsDirectory)\Airion.Tests"
+			ReportTypes="html;xml"	>
+			<!-- This tells MSBuild to store the output value of the task's ExitCode property
+                 into the project's ExitCode property -->
+			<Output TaskParameter="ExitCode" PropertyName="GallioExitCode"/>
+		</Gallio>
+		<Error Text="Tests execution failed" Condition="'$(GallioExitCode)' != 0" />
+	</Target>
+	
+	<Target Name="Package" DependsOnTargets="Build">
+		<!-- Package Tasks -->
+	</Target>
+</Project>

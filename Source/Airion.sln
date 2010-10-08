@@ -1,0 +1,107 @@
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Main", "Main", "{A7C5D50E-1811-446F-9C3B-C3A96C12F095}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Files", "Files", "{93366C44-574D-4846-AFD0-3BAA1623F9ED}"
+	ProjectSection(SolutionItems) = preProject
+		../Airion.proj = ../Airion.proj
+		./Airion.prebuild.xml = ./Airion.prebuild.xml
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Airion.Common", "..\Source\Main\Airion.Common\Airion.Common.csproj", "{AE263B2D-0000-0000-0000-000000000000}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Airion.MVC", "..\Source\Main\Airion.MVC\Airion.MVC.csproj", "{6BFCD6BA-0000-0000-0000-000000000000}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Airion.Persist", "..\Source\Main\Airion.Persist\Airion.Persist.csproj", "{B4481E16-0000-0000-0000-000000000000}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Airion.Persist.NHibernateProvider", "..\Source\Main\Airion.Persist.NHibernateProvider\Airion.Persist.NHibernateProvider.csproj", "{EC26A20D-0000-0000-0000-000000000000}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Airion.Persist.TransientProvider", "..\Source\Main\Airion.Persist.TransientProvider\Airion.Persist.TransientProvider.csproj", "{2FE989E9-0000-0000-0000-000000000000}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Airion.Testing", "..\Source\Main\Airion.Testing\Airion.Testing.csproj", "{E5D71392-0000-0000-0000-000000000000}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{F6824974-6345-499D-906F-1C30D9BE745F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Airion.Common.Tests", "..\Source\Tests\Airion.Common.Tests\Airion.Common.Tests.csproj", "{271F7878-0000-0000-0000-000000000000}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Airion.MVC.Tests", "..\Source\Tests\Airion.MVC.Tests\Airion.MVC.Tests.csproj", "{B56F9573-0000-0000-0000-000000000000}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Airion.Persist.NHibernateProvider.Tests", "..\Source\Tests\Airion.Persist.NHibernateProvider.Tests\Airion.Persist.NHibernateProvider.Tests.csproj", "{5EB10946-0000-0000-0000-000000000000}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Airion.Persist.Tests", "..\Source\Tests\Airion.Persist.Tests\Airion.Persist.Tests.csproj", "{0EF20B4D-0000-0000-0000-000000000000}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Airion.Persist.TransientProvider.Tests", "..\Source\Tests\Airion.Persist.TransientProvider.Tests\Airion.Persist.TransientProvider.Tests.csproj", "{DB5AEEE4-0000-0000-0000-000000000000}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Airion.TestRunner", "..\Source\Tests\Airion.TestRunner\Airion.TestRunner.csproj", "{6BC43878-0000-0000-0000-000000000000}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x86 = Debug|x86
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{AE263B2D-0000-0000-0000-000000000000}.Debug|x86.ActiveCfg = Debug|x86
+		{AE263B2D-0000-0000-0000-000000000000}.Debug|x86.Build.0 = Debug|x86
+		{AE263B2D-0000-0000-0000-000000000000}.Release|x86.ActiveCfg = Release|x86
+		{AE263B2D-0000-0000-0000-000000000000}.Release|x86.Build.0 = Release|x86
+		{6BFCD6BA-0000-0000-0000-000000000000}.Debug|x86.ActiveCfg = Debug|x86
+		{6BFCD6BA-0000-0000-0000-000000000000}.Debug|x86.Build.0 = Debug|x86
+		{6BFCD6BA-0000-0000-0000-000000000000}.Release|x86.ActiveCfg = Release|x86
+		{6BFCD6BA-0000-0000-0000-000000000000}.Release|x86.Build.0 = Release|x86
+		{B4481E16-0000-0000-0000-000000000000}.Debug|x86.ActiveCfg = Debug|x86
+		{B4481E16-0000-0000-0000-000000000000}.Debug|x86.Build.0 = Debug|x86
+		{B4481E16-0000-0000-0000-000000000000}.Release|x86.ActiveCfg = Release|x86
+		{B4481E16-0000-0000-0000-000000000000}.Release|x86.Build.0 = Release|x86
+		{EC26A20D-0000-0000-0000-000000000000}.Debug|x86.ActiveCfg = Debug|x86
+		{EC26A20D-0000-0000-0000-000000000000}.Debug|x86.Build.0 = Debug|x86
+		{EC26A20D-0000-0000-0000-000000000000}.Release|x86.ActiveCfg = Release|x86
+		{EC26A20D-0000-0000-0000-000000000000}.Release|x86.Build.0 = Release|x86
+		{2FE989E9-0000-0000-0000-000000000000}.Debug|x86.ActiveCfg = Debug|x86
+		{2FE989E9-0000-0000-0000-000000000000}.Debug|x86.Build.0 = Debug|x86
+		{2FE989E9-0000-0000-0000-000000000000}.Release|x86.ActiveCfg = Release|x86
+		{2FE989E9-0000-0000-0000-000000000000}.Release|x86.Build.0 = Release|x86
+		{E5D71392-0000-0000-0000-000000000000}.Debug|x86.ActiveCfg = Debug|x86
+		{E5D71392-0000-0000-0000-000000000000}.Debug|x86.Build.0 = Debug|x86
+		{E5D71392-0000-0000-0000-000000000000}.Release|x86.ActiveCfg = Release|x86
+		{E5D71392-0000-0000-0000-000000000000}.Release|x86.Build.0 = Release|x86
+		{271F7878-0000-0000-0000-000000000000}.Debug|x86.ActiveCfg = Debug|x86
+		{271F7878-0000-0000-0000-000000000000}.Debug|x86.Build.0 = Debug|x86
+		{271F7878-0000-0000-0000-000000000000}.Release|x86.ActiveCfg = Release|x86
+		{271F7878-0000-0000-0000-000000000000}.Release|x86.Build.0 = Release|x86
+		{B56F9573-0000-0000-0000-000000000000}.Debug|x86.ActiveCfg = Debug|x86
+		{B56F9573-0000-0000-0000-000000000000}.Debug|x86.Build.0 = Debug|x86
+		{B56F9573-0000-0000-0000-000000000000}.Release|x86.ActiveCfg = Release|x86
+		{B56F9573-0000-0000-0000-000000000000}.Release|x86.Build.0 = Release|x86
+		{5EB10946-0000-0000-0000-000000000000}.Debug|x86.ActiveCfg = Debug|x86
+		{5EB10946-0000-0000-0000-000000000000}.Debug|x86.Build.0 = Debug|x86
+		{5EB10946-0000-0000-0000-000000000000}.Release|x86.ActiveCfg = Release|x86
+		{5EB10946-0000-0000-0000-000000000000}.Release|x86.Build.0 = Release|x86
+		{0EF20B4D-0000-0000-0000-000000000000}.Debug|x86.ActiveCfg = Debug|x86
+		{0EF20B4D-0000-0000-0000-000000000000}.Debug|x86.Build.0 = Debug|x86
+		{0EF20B4D-0000-0000-0000-000000000000}.Release|x86.ActiveCfg = Release|x86
+		{0EF20B4D-0000-0000-0000-000000000000}.Release|x86.Build.0 = Release|x86
+		{DB5AEEE4-0000-0000-0000-000000000000}.Debug|x86.ActiveCfg = Debug|x86
+		{DB5AEEE4-0000-0000-0000-000000000000}.Debug|x86.Build.0 = Debug|x86
+		{DB5AEEE4-0000-0000-0000-000000000000}.Release|x86.ActiveCfg = Release|x86
+		{DB5AEEE4-0000-0000-0000-000000000000}.Release|x86.Build.0 = Release|x86
+		{6BC43878-0000-0000-0000-000000000000}.Debug|x86.ActiveCfg = Debug|x86
+		{6BC43878-0000-0000-0000-000000000000}.Debug|x86.Build.0 = Debug|x86
+		{6BC43878-0000-0000-0000-000000000000}.Release|x86.ActiveCfg = Release|x86
+		{6BC43878-0000-0000-0000-000000000000}.Release|x86.Build.0 = Release|x86
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{AE263B2D-0000-0000-0000-000000000000} = {A7C5D50E-1811-446F-9C3B-C3A96C12F095}
+		{6BFCD6BA-0000-0000-0000-000000000000} = {A7C5D50E-1811-446F-9C3B-C3A96C12F095}
+		{B4481E16-0000-0000-0000-000000000000} = {A7C5D50E-1811-446F-9C3B-C3A96C12F095}
+		{EC26A20D-0000-0000-0000-000000000000} = {A7C5D50E-1811-446F-9C3B-C3A96C12F095}
+		{2FE989E9-0000-0000-0000-000000000000} = {A7C5D50E-1811-446F-9C3B-C3A96C12F095}
+		{E5D71392-0000-0000-0000-000000000000} = {A7C5D50E-1811-446F-9C3B-C3A96C12F095}
+		{93366C44-574D-4846-AFD0-3BAA1623F9ED} = {A7C5D50E-1811-446F-9C3B-C3A96C12F095}
+		{271F7878-0000-0000-0000-000000000000} = {F6824974-6345-499D-906F-1C30D9BE745F}
+		{B56F9573-0000-0000-0000-000000000000} = {F6824974-6345-499D-906F-1C30D9BE745F}
+		{5EB10946-0000-0000-0000-000000000000} = {F6824974-6345-499D-906F-1C30D9BE745F}
+		{0EF20B4D-0000-0000-0000-000000000000} = {F6824974-6345-499D-906F-1C30D9BE745F}
+		{DB5AEEE4-0000-0000-0000-000000000000} = {F6824974-6345-499D-906F-1C30D9BE745F}
+		{6BC43878-0000-0000-0000-000000000000} = {F6824974-6345-499D-906F-1C30D9BE745F}
+	EndGlobalSection
+EndGlobal
