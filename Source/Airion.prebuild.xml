@@ -18,7 +18,6 @@
 			</Options>
 		</Configuration>
 		
-		<!-- Main -->
 		<EmbeddedSolution name="Main">
 			<Configuration name="Debug" platform="x86">
 				<Options>
@@ -37,7 +36,6 @@
 				</Options>
 			</Configuration>
 			
-			<!-- Airion.Common -->
 			<Project name="Airion.Common"
 			         path="Main/Airion.Common"
 			         assemblyName="Airion.Common"
@@ -66,7 +64,6 @@
 				</Files>
 			</Project>
 						
-			<!-- Airion.Persist -->
 			<Project name="Airion.Persist"
 			         path="Main/Airion.Persist"
 			         assemblyName="Airion.Persist"
@@ -96,7 +93,6 @@
 				</Files>
 			</Project>
 			
-			<!-- Airion.Persist.TransientProvider -->
 			<Project name="Airion.Persist.TransientProvider"
 			         path="Main/Airion.Persist.TransientProvider"
 			         assemblyName="Airion.Persist.TransientProvider"
@@ -127,7 +123,6 @@
 				</Files>
 			</Project>
 			
-			<!-- Airion.Persist.NHibernateProvider -->
 			<Project name="Airion.Persist.NHibernateProvider"
 			         path="Main/Airion.Persist.NHibernateProvider"
 			         assemblyName="Airion.Persist.NHibernateProvider"
@@ -164,7 +159,6 @@
 				</Files>
 			</Project>
 			
-			<!-- Airion.MVC -->
 			<Project name="Airion.MVC"
 			         path="Main/Airion.MVC"
 			         assemblyName="Airion.MVC"
@@ -194,7 +188,6 @@
 				</Files>
 			</Project>
 			
-			<!-- Airion.Testing -->
 			<Project name="Airion.Testing"
 			         path="Main/Airion.Testing"
 			         assemblyName="Airion.Testing"
@@ -224,7 +217,6 @@
 				</Files>
 			</Project>
 			
-			<!-- Files -->
 			<EmbeddedSolution name="Files">
 				<Files>
 					<File>../Airion.proj</File>
@@ -233,7 +225,6 @@
 			</EmbeddedSolution>
 		</EmbeddedSolution>
 		
-		<!-- Tests -->
 		<EmbeddedSolution name="Tests">
 			<Configuration name="Debug" platform="x86">
 				<Options>
@@ -252,7 +243,6 @@
 				</Options>
 			</Configuration>
 			
-			<!-- Airion.Common.Tests -->
 			<Project name="Airion.Common.Tests"
 			         rootNamespace="Airion"
 			         path="./Tests/Airion.Common.Tests"
@@ -272,11 +262,12 @@
 				<Reference name="Airion.Testing" localCopy="true" />
 				
 				<Files>
+					<Match buildAction="Content" pattern="*.feature" recurse="true" copyToOutput="Never"/>
+					<Match buildAction="Compile" pattern="*.feature.cs" recurse="true" subType="Code"/>
 					<Match buildAction="Compile" pattern="*.cs" recurse="true"/>
 				</Files>
 			</Project>
 			
-			<!-- Airion.Persist.Tests -->
 			<Project name="Airion.Persist.Tests"
 			         path="./Tests/Airion.Persist.Tests"
 			         language="C#"
@@ -292,17 +283,16 @@
 				<Reference name="Moq" path="../../Libraries/Moq" localCopy="true" />
 				
 				<Reference name="Airion.Common" localCopy="true" />
-				<Reference name="Airion.Domain" localCopy="true" />
-				<Reference name="Airion.Persistence" localCopy="true" />
+				<Reference name="Airion.Persist" localCopy="true" />
 				<Reference name="Airion.Testing" localCopy="true" />
 				
 				<Files>
+					<Match buildAction="Content" pattern="*.feature" recurse="true" copyToOutput="Never"/>
+					<Match buildAction="Compile" pattern="*.feature.cs" recurse="true" subType="Code"/>
 					<Match buildAction="Compile" pattern="*.cs" recurse="true"/>
 				</Files>
 			</Project>
 			
-			
-			<!-- Airion.Persist.TransientProvider.Tests -->
 			<Project name="Airion.Persist.TransientProvider.Tests"
 			         path="./Tests/Airion.Persist.TransientProvider.Tests"
 			         language="C#"
@@ -323,11 +313,12 @@
 				<Reference name="Airion.Testing" localCopy="true" />
 				
 				<Files>
+					<Match buildAction="Content" pattern="*.feature" recurse="true" copyToOutput="Never"/>
+					<Match buildAction="Compile" pattern="*.feature.cs" recurse="true" subType="Code"/>
 					<Match buildAction="Compile" pattern="*.cs" recurse="true"/>
 				</Files>
 			</Project>
 			
-			<!-- Airion.Persist.NHibernateProvider.Tests -->
 			<Project name="Airion.Persist.NHibernateProvider.Tests"
 			         path="./Tests/Airion.Persist.NHibernateProvider.Tests"
 			         language="C#"
@@ -354,11 +345,12 @@
 				<Reference name="Airion.Testing" localCopy="true" />
 				
 				<Files>
+					<Match buildAction="Content" pattern="*.feature" recurse="true" copyToOutput="Never"/>
+					<Match buildAction="Compile" pattern="*.feature.cs" recurse="true" subType="Code"/>
 					<Match buildAction="Compile" pattern="*.cs" recurse="true"/>
 				</Files>
 			</Project>
 			
-			<!-- Airion.MVC.Tests -->
 			<Project name="Airion.MVC.Tests"
 			         path="./Tests/Airion.MVC.Tests"
 			         language="C#"
@@ -378,11 +370,12 @@
 				<Reference name="Airion.Testing" localCopy="true" />
 				
 				<Files>
+					<Match buildAction="Content" pattern="*.feature" recurse="true" copyToOutput="Never"/>
+					<Match buildAction="Compile" pattern="*.feature.cs" recurse="true" subType="Code"/>
 					<Match buildAction="Compile" pattern="*.cs" recurse="true"/>
 				</Files>
 			</Project>
 						
-			<!-- Airion.TestRunner -->
 			<Project name="Airion.TestRunner"
 			         path="./Tests/Airion.TestRunner"
 			         rootNamespace="Airion.TestRunner"
