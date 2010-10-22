@@ -12,12 +12,23 @@ namespace Airion.Persist.Internal
 	/// Description of Conversation.
 	/// </summary>
 	public class Conversation : DisposableBase, IConversation
-	{		
+	{
 		private SessionAndTransactionManager _sessionAndTransactionManager;
 		
 		public Conversation(IPersistenceProvider provider)
 		{
 			_sessionAndTransactionManager = new SessionAndTransactionManager(provider);
+		}
+		
+		protected override void Dispose(bool disposing)
+		{
+			if(disposing) {
+				if(_sessionAndTransactionManager != null) {
+					_sessionAndTransactionManager.Dispose();
+					_sessionAndTransactionManager = null;
+				}
+			}
+			base.Dispose(disposing);
 		}
 		
 		public T Get<T>(object id)

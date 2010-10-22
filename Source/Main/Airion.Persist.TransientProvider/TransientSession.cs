@@ -18,9 +18,11 @@ namespace Airion.Persist.TransientProvider
 	public class TransientSession : LightDisposableBase, ISession
 	{		
 		private EntityStore _entityStore = new EntityStore();
+		public IPersistenceProvider PersistenceProvider { get; private set; }
 		
-		public TransientSession()
+		public TransientSession(IPersistenceProvider persistenceProvider)
 		{
+			PersistenceProvider = persistenceProvider;
 		}
 		
 		public ITransaction BeginTransaction()

@@ -31,7 +31,7 @@ namespace Airion.Persist.NHibernateProvider
 			CheckState();
 			
 			var nhSession = _sessionFactory.OpenSession();
-			var session = new NHibernateSession(nhSession);
+			var session = new NHibernateSession(this, nhSession);
 			OnSessionOpened(new SessionEventArgs(session));
 			return session;
 		}

@@ -11,6 +11,8 @@ namespace Airion.Persist.Provider
 	/// </summary>
 	public interface ISession : IDisposable
 	{
+		IPersistenceProvider PersistenceProvider { get; }
+		
 		ITransaction BeginTransaction();
 		
 		T Get<T>(object id);

@@ -18,7 +18,7 @@ namespace Airion.Persist.TransientProvider
 		
 		public ISession OpenSession()
 		{
-			var session = new TransientSession();
+			var session = new TransientSession(this);
 			OnSessionOpened(new SessionEventArgs(session));
 			return session;
 		}

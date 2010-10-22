@@ -14,8 +14,11 @@ namespace Airion.Persist.Tests.Support
 	/// </summary>
 	public class FakeSession : LightDisposableBase, ISession
 	{		
-		public FakeSession()
+		public IPersistenceProvider PersistenceProvider { get; private set; }
+		
+		public FakeSession(FakePersistenceProvider provider)
 		{
+			PersistenceProvider = provider;
 		}
 		
 		public ITransaction BeginTransaction()

@@ -26,6 +26,7 @@ namespace Airion.Persist.Internal
 			get {
 				if(_session == null) {
 					_session = _provider.OpenSession();
+					
 					_transaction = _session.BeginTransaction();
 				}
 				return _session;

@@ -18,7 +18,7 @@ namespace Airion.Persist.Tests.Support
 		
 		public ISession OpenSession()
 		{
-			return new FakeSession();
+			return new FakeSession(this);
 		}
 		
 		public event EventHandler<SessionEventArgs> SessionOpened;
