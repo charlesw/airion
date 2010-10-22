@@ -49,5 +49,10 @@ namespace Airion.Persist.Tests.Support
 		public void Delete<T>(T entity)
 		{
 		}
+		
+		public void Flush()
+		{
+			throw new NotImplementedException();
+		}
 	}
 }

@@ -6,12 +6,15 @@ using System;
 namespace Airion.Persist.Provider
 {
 	/// <summary>
-	/// Description of IPersistenceProvider.
+	/// Description of SessionEventArgs.
 	/// </summary>
-	public interface IPersistenceProvider : IDisposable
+	public class SessionEventArgs : EventArgs
 	{
-		ISession OpenSession();
+		public SessionEventArgs(ISession session)
+		{
+			Session = session;
+		}
 		
-		event EventHandler<SessionEventArgs> SessionOpened;
+		public ISession Session { get; private set; }
 	}
 }

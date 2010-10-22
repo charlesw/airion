@@ -24,5 +24,7 @@ namespace Airion.Persist.Provider
 		void SaveOrUpdate<T>(T entity);
 		
 		void Delete<T>(T entity);
+		
+		void Flush();
 	}
 }

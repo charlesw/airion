@@ -20,5 +20,7 @@ namespace Airion.Persist.Tests.Support
 		{
 			return new FakeSession();
 		}
+		
+		public event EventHandler<SessionEventArgs> SessionOpened;
 	}
 }

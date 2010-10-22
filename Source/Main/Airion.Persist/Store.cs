@@ -4,6 +4,7 @@
 using System;
 using System.Diagnostics;
 using Airion.Common;
+using Airion.Persist.Internal;
 using Airion.Persist.Provider;
 
 namespace Airion.Persist
@@ -24,11 +25,16 @@ namespace Airion.Persist
 			_currentConversation = _configuration.BuildValueStore();
 		}
 		
+		public IPersistenceProvider PersistenceProvider
+		{
+			get { return _persistenceProvider; }
+		}
+		
 		public IConversation BeginConversation()
 		{
 			Guard.Operation(CurrentConversation == null, "There is already an active conversation.");
 			
-			var conversation = new Conversation();
+			var conversation = new Conversation(_persistenceProvider);
 			conversation.Disposed += ConversationDisposed;		
 			CurrentConversation = conversation;
 			return conversation;

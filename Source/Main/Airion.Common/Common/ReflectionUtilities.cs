@@ -54,6 +54,16 @@ namespace Airion.Common
 			}
 			return fields;
 		}
+		
+		public static PropertyInfo GetInstanceProperty(this Type type, string name)
+		{
+			PropertyInfo result = null;
+			while(type != null && result == null) {
+				result = type.GetProperty(name, BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
+				type = type.BaseType;
+			}
+			return result;
+		}
 
 		public static T[] GetAttributes<T>(this MemberInfo memberInfo, bool inherit)
 			where T: Attribute
@@ -75,6 +85,18 @@ namespace Airion.Common
 		public static string GetAssemblyQualifiedName(string typeName, string assemblyName)
 		{
 			return String.Format("{0}, {1}", typeName, assemblyName);
+		}
+		
+		public static object GetDefaultValue(this Type type)
+		{
+			if(type.IsEnum) {
+				var values = Enum.GetValues(type);
+				return values.Length > 0 ? values.GetValue(0) : 0;
+			} else if(type.IsValueType) {
+				return Activator.CreateInstance(type);
+			} else {
+				return null;
+			}
 		}
 	}
 }
