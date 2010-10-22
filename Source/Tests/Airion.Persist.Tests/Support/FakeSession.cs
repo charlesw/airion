@@ -55,7 +55,8 @@ namespace Airion.Persist.Tests.Support
 		
 		public void Flush()
 		{
-			throw new NotImplementedException();
 		}
+		
+		public FlushMode FlushMode { get; set; }
 	}
 }

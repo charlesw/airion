@@ -9,13 +9,12 @@ using Airion.Persist.NHibernateProvider.Tests.Support;
 using Airion.Persist.Provider;
 using Airion.Persist.Tests.Contracts;
 using FluentNHibernate.Cfg.Db;
+using MbUnit.Framework;
 using NHibernate.Tool.hbm2ddl;
 
 namespace Airion.Persist.NHibernateProvider.Tests.Contract
 {
-	/// <summary>
-	/// Description of NHibernateProviderTests.
-	/// </summary>
+	[TestFixture, Parallelizable(TestScope.All)]
 	public class NHibernateConversationTests : ConversationTests
 	{
 		private string _dbSchema;
@@ -46,6 +45,8 @@ namespace Airion.Persist.NHibernateProvider.Tests.Contract
 		void PersistenceProvider_SessionOpened(object sender, SessionEventArgs e)
 		{
 			var session = (NHibernateSession)e.Session;
+			session.FlushMode = FlushMode.Never;
+			
 			var provider = (NHibernateProvider)session.PersistenceProvider;
 			using(var script = new StringReader(_dbSchema)) {
 				var schemaExecuter = new ScriptExecuter(session);

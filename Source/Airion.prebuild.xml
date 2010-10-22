@@ -344,8 +344,6 @@
 				<Reference name="Airion.Persist.Tests" localCopy="true" />
 				
 				<Files>
-					<Match buildAction="Content" pattern="*.feature" recurse="true" copyToOutput="Never"/>
-					<Match buildAction="Compile" pattern="*.feature.cs" recurse="true" subType="Code"/>
 					<Match buildAction="Compile" pattern="*.cs" recurse="true"/>
 				</Files>
 			</Project>
@@ -409,7 +407,7 @@
 				<Reference name="Airion.MVC.Tests" localCopy="true"/>
 				
 				<Files>
-					<File>app.config</File>
+					<File buildAction="None">app.config</File>
 					<Match buildAction="Compile" pattern="*.cs" recurse="true"/>
 				</Files>
 			</Project>

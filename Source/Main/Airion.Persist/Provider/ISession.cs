@@ -28,5 +28,7 @@ namespace Airion.Persist.Provider
 		void Delete<T>(T entity);
 		
 		void Flush();
+		
+		FlushMode FlushMode { get; set; }
 	}
 }

@@ -21,9 +21,6 @@ namespace Airion.Persist.NHibernateProvider
 		{
 			PersistenceProvider = persistenceProvider;
 			Session = nhSession;
-			
-			// TEMP: - Testing purposes only
-			Session.FlushMode = FlushMode.Never;
 		}
 		
 		protected override void Dispose(bool disposing)
@@ -79,6 +76,15 @@ namespace Airion.Persist.NHibernateProvider
 		public void Flush()
 		{
 			Session.Flush();
+		}
+		
+		public Airion.Persist.Provider.FlushMode FlushMode {
+			get {
+				return (Airion.Persist.Provider.FlushMode)Session.FlushMode;
+			}
+			set {
+				Session.FlushMode = (NHibernate.FlushMode)value;
+			}
 		}
 	}
 }

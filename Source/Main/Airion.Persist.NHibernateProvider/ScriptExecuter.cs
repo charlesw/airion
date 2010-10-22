@@ -18,6 +18,7 @@ namespace Airion.Persist.NHibernateProvider
 			Session = session;
 		}
 		
+		// TODO: Break script down into individual commands & execute.
 		public void Execute(TextReader script)
 		{
 			var nhSession = Session.Session;

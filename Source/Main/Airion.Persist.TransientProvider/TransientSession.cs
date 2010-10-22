@@ -94,7 +94,10 @@ namespace Airion.Persist.TransientProvider
 		
 		public void Flush()
 		{
-			throw new NotImplementedException();
+		}
+		
+		public FlushMode FlushMode {
+			get; set;
 		}
 	}
 }
