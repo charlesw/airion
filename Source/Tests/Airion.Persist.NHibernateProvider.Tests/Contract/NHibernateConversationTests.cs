@@ -14,7 +14,7 @@ using NHibernate.Tool.hbm2ddl;
 
 namespace Airion.Persist.NHibernateProvider.Tests.Contract
 {
-	[TestFixture, Parallelizable(TestScope.All)]
+	[TestFixture][NUnit.Framework.TestFixture]
 	public class NHibernateConversationTests : ConversationTests
 	{
 		private string _dbSchema;

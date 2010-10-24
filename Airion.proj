@@ -22,6 +22,7 @@
 		<ProjectDirectories Include="$(SourceDirectory)\Main\Airion.Persist\" />
 		<ProjectDirectories Include="$(SourceDirectory)\Main\Airion.Persist.TransientProvider\" />
 		<ProjectDirectories Include="$(SourceDirectory)\Main\Airion.Persist.NHibernateProvider\" />
+		<ProjectDirectories Include="$(SourceDirectory)\Main\Airion.Persist.CQRS\" />
 		<ProjectDirectories Include="$(SourceDirectory)\Main\Airion.MVC\" />
 		<ProjectDirectories Include="$(SourceDirectory)\Main\Airion.Testing\" />
 	
@@ -29,6 +30,7 @@
 		<ProjectDirectories Include="$(SourceDirectory)\Tests\Airion.Persist.Tests\" />
 		<ProjectDirectories Include="$(SourceDirectory)\Tests\Airion.Persist.TransientProvider.Tests\" />
 		<ProjectDirectories Include="$(SourceDirectory)\Tests\Airion.Persist.NHibernateProvider.Tests\" />
+		<ProjectDirectories Include="$(SourceDirectory)\Tests\Airion.Persist.CQRS.Tests\" />
 		<ProjectDirectories Include="$(SourceDirectory)\Tests\Airion.MVC.Tests\" />
 		<ProjectDirectories Include="$(SourceDirectory)\Tests\Airion.Testing.Tests\" />
 	</ItemGroup>

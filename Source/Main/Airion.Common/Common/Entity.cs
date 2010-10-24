@@ -36,7 +36,8 @@ namespace Airion.Common
 		
 		public override int GetHashCode()
 		{
-			return GetType().GetHashCode() ^ Id.GetHashCode();
+			const int HashMultiplier = 37;
+			return (GetType().GetHashCode() * HashMultiplier) ^ Id.GetHashCode();
 		}
 		
 		public static bool operator ==(Entity<TId> lhs, Entity<TId> rhs)
