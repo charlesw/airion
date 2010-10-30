@@ -46,7 +46,7 @@ namespace Airion.Parallels.Internal.Tests
 					() => {
 						waitHandle.WaitOne();
 						executed = true;
-					});
+					}, null, CancellationToken.None);
 				// the worker should be pending execution or waiting at the wait handle
 				Assert.That(future.IsFinished, Is.False);
 				Assert.That(executed, Is.False);
@@ -81,7 +81,7 @@ namespace Airion.Parallels.Internal.Tests
 
 			// schedule some work
 			for (int i = 0; i < 50; i++) {
-				workQueue.SendAction(() => { Thread.Sleep(50); });
+				workQueue.SendAction(() => { Thread.Sleep(50); }, null, CancellationToken.None);
 			}
 
 			// wait until work is done
@@ -118,14 +118,14 @@ namespace Airion.Parallels.Internal.Tests
 					
 					// simulate some time consuming work
 					Thread.Sleep(100);
-				});
+				}, null, CancellationToken.None);
 			
 			
 			
 			// enqueue another worker this should not be executed
 			bool secondActionExecuted = false;
 			var secondFuture = workQueue.SendAction(
-				() => { secondActionExecuted = true; }
+				() => { secondActionExecuted = true; }, null, CancellationToken.None
 			);
 			
 			actionResetEvent.Set();

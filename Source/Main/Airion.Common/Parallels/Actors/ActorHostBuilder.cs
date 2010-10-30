@@ -18,9 +18,9 @@ namespace Airion.Parallels.Actors
 	{
 		private HashSet<Type> _subjectTypes;
 		private ActorHost.Factory _hostFactory;
-		private TaskWorker.Factory _workerFactory;
+		private TaskWorkerFactory _workerFactory;
 		
-		public ActorHostBuilder(TaskWorker.Factory taskWorkerFactory, ActorHost.Factory hostFactory)
+		public ActorHostBuilder(TaskWorkerFactory taskWorkerFactory, ActorHost.Factory hostFactory)
 		{
 			_subjectTypes = new HashSet<Type>();
 			_hostFactory = hostFactory;

@@ -3,13 +3,13 @@
 
 using System;
 
-namespace Airion.Persist.CQRS
+namespace Airion.Parallels
 {
 	/// <summary>
-	/// Description of ICommand.
+	/// Description of IWorkItemCallback.
 	/// </summary>
-	public interface ICommand
-	{		
-		void Execute(CommandContext commandContext);
+	public interface IWorkItemCallback
+	{
+		void NotifyCallback();
 	}
 }

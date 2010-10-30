@@ -14,7 +14,7 @@ namespace Airion.Parallels.Actors.Internal
 			get; set;
 		}		
 		
-		public TaskWorker TaskWorker { 
+		public ITaskWorker TaskWorker { 
 			get; set;
 		}
 	}

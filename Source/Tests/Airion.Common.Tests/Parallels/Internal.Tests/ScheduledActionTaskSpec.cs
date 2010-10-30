@@ -14,9 +14,9 @@ namespace Airion.Parallels.Internal.Tests
 	[TestFixture]
 	public class ScheduledActionTaskSpec : ScheduledTaskSpec
 	{
-		protected override IScheduledTask CreateScheduledTask(Action action, CancellationToken cancellationToken)
+		protected override IScheduledTask CreateScheduledTask(Action action, Action callbackAction, CancellationToken cancellationToken)
 		{
-			return new ScheduledActionTask(action, cancellationToken);
+			return new ScheduledActionTask(action, callbackAction, cancellationToken);
 		}		
 	}
 }

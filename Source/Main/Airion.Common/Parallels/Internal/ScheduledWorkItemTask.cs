@@ -22,6 +22,14 @@ namespace Airion.Parallels.Internal
 			Task.Execute();
 		}
 		
+		protected override void WaitCompleted()
+		{
+			var callbackTask = Task as IWorkItemCallback;
+			if(callbackTask != null) {
+				callbackTask.NotifyCallback();
+			}
+		}
+		
 		public IWorkItem Task { get; private set; }
 	}
 }

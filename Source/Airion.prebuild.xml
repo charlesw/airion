@@ -416,6 +416,7 @@
 				<Reference name="Airion.Persist" localCopy="true" />				
 				<Reference name="Airion.Persist.TransientProvider" localCopy="true" />						
 				<Reference name="Airion.Persist.CQRS" localCopy="true" />
+				<Reference name="Airion.Testing" localCopy="true" />	
 				
 				<Reference name="NUnit.Framework" path="../../Libraries/NUnit" localCopy="true" />
 				<Reference name="Moq" path="../../Libraries/Moq" localCopy="true" />

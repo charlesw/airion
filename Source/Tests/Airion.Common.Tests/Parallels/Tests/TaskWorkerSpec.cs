@@ -14,13 +14,35 @@ namespace Airion.Parallels.Tests
 	[TestFixture]
 	public class TaskWorkerSpec : ParallelsAutofacTestBase
 	{
+		#region Fakes
+		
+		public class FakeWorkItem : IWorkItem
+		{		
+			public int ExecuteCount { get; private set; }
+			public Thread SchedulingThread { get; private set; }
+			
+			public FakeWorkItem(Thread schedulingThread)
+			{
+				SchedulingThread = schedulingThread;
+				ExecuteCount = 0;
+			}
+				
+			public void Execute()
+			{
+				Assert.That(Thread.CurrentThread, Is.Not.EqualTo(SchedulingThread));
+				ExecuteCount++;
+			}
+		}
+		
+		#endregion
+		
 		[Test(Description=@"Should be able to specify thread apartment")]
 		[TestCase(ApartmentState.MTA)]
 		[TestCase(ApartmentState.STA)]
 		public void SpecifyThreadApartment(ApartmentState apartmentState) 
 		{
 			var container = BuildContainer();
-			var taskWorkerFactory = container.Resolve<TaskWorker.Factory>();
+			var taskWorkerFactory = container.Resolve<TaskWorkerFactory>();
 			using(var taskWorker = taskWorkerFactory(apartmentState)) {
 				taskWorker.Start();
 				
@@ -33,11 +55,28 @@ namespace Airion.Parallels.Tests
 			}
 		}
 		
+		[Test(Description=@"Should be able to execute workitem on different thread")]
+		public void ExecuteWorkItem()
+		{
+			var container = BuildContainer();
+			var taskWorkerFactory = container.Resolve<TaskWorkerFactory>();
+			using(var taskWorker = taskWorkerFactory(ApartmentState.MTA)) {
+				taskWorker.Start();
+				
+				var workItem = new FakeWorkItem(Thread.CurrentThread);
+				var taskHandle = taskWorker.ExecuteWorkItem(workItem);
+				
+				taskHandle.Wait();
+				
+				Assert.That(workItem.ExecuteCount, Is.EqualTo(1));
+			}
+		}
+		
 		[Test(Description=@"Should be able to execute action on different thread")]
 		public void ExecuteAction()
 		{
 			var container = BuildContainer();
-			var taskWorkerFactory = container.Resolve<TaskWorker.Factory>();
+			var taskWorkerFactory = container.Resolve<TaskWorkerFactory>();
 			using(var taskWorker = taskWorkerFactory(ApartmentState.MTA)) {
 				taskWorker.Start();
 				
@@ -63,7 +102,7 @@ namespace Airion.Parallels.Tests
 			var token = source.Token;
 			
 			var container = BuildContainer();
-			var taskWorkerFactory = container.Resolve<TaskWorker.Factory>();
+			var taskWorkerFactory = container.Resolve<TaskWorkerFactory>();
 			using(var taskWorker = taskWorkerFactory(ApartmentState.MTA)) {
 				taskWorker.Start();
 				
@@ -87,7 +126,7 @@ namespace Airion.Parallels.Tests
 		public void ExecuteFunction()
 		{
 			var container = BuildContainer();
-			var taskWorkerFactory = container.Resolve<TaskWorker.Factory>();
+			var taskWorkerFactory = container.Resolve<TaskWorkerFactory>();
 			using(var taskWorker = taskWorkerFactory(ApartmentState.MTA)) {
 				taskWorker.Start();
 				
@@ -115,7 +154,7 @@ namespace Airion.Parallels.Tests
 			
 			var token = source.Token;
 			var container = BuildContainer();
-			var taskWorkerFactory = container.Resolve<TaskWorker.Factory>();
+			var taskWorkerFactory = container.Resolve<TaskWorkerFactory>();
 			using(var taskWorker = taskWorkerFactory(ApartmentState.MTA)) {
 				taskWorker.Start();
 				

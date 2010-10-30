@@ -31,30 +31,20 @@ namespace Airion.Parallels.Extensions
 			return scheduledTask;
 		}
 		
-		public static ITaskHandle SendAction(this IPendingWorkCollection<IScheduledTask> pendingWork, Action action)
-		{
-			return SendAction(pendingWork, action, CancellationToken.None);
-		}
-		
-		public static ITaskHandle SendAction(this IPendingWorkCollection<IScheduledTask> pendingWork, Action action, CancellationToken cancellationToken)
+		public static ITaskHandle SendAction(this IPendingWorkCollection<IScheduledTask> pendingWork, Action action, Action callbackAction, CancellationToken cancellationToken)
 		{
 			Guard.RequireNotNull("action", action);
 			
-			var scheduledTask = new ScheduledActionTask(action, cancellationToken);
+			var scheduledTask = new ScheduledActionTask(action, callbackAction, cancellationToken);
 			pendingWork.Send(scheduledTask);
 			return scheduledTask;
 		}
 		
-		public static ITaskHandle<TResult> SendFunction<TResult>(this IPendingWorkCollection<IScheduledTask> pendingWork, Func<TResult> function)
+		public static ITaskHandle<TResult> SendFunction<TResult>(this IPendingWorkCollection<IScheduledTask> pendingWork, Func<TResult> function, Action callbackAction, CancellationToken cancellationToken)
 		{
-			return SendFunction(pendingWork, function, CancellationToken.None);
-		}
-		
-		public static ITaskHandle<TResult> SendFunction<TResult>(this IPendingWorkCollection<IScheduledTask> pendingWork, Func<TResult> function, CancellationToken cancellationToken)
-		{
-			Guard.RequireNotNull("function", function); 
+			Guard.RequireNotNull("function", function);
 			
-			var scheduledTask = new ScheduledFunctionTask<TResult>(function, cancellationToken);
+			var scheduledTask = new ScheduledFunctionTask<TResult>(function, callbackAction, cancellationToken);
 			pendingWork.Send(scheduledTask);
 			return scheduledTask;
 		}

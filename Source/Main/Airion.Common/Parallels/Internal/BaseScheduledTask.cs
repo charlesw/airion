@@ -58,6 +58,8 @@ namespace Airion.Parallels.Internal
 		
 		protected abstract void ExecuteTask();
 		
+		protected abstract void WaitCompleted();
+		
 		public void Wait()
 		{
 			if(!_isFinished) {
@@ -65,6 +67,7 @@ namespace Airion.Parallels.Internal
 				Close();
 				Debug.Assert(_isFinished);
 			}
+			WaitCompleted();
 		}
 		
 		private void Finish()

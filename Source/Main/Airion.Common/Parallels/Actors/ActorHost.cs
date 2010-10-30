@@ -16,11 +16,11 @@ namespace Airion.Parallels.Actors
 	public class ActorHost : LightDisposableBase
 	{
 		private IActorBuilder _builder;
-		private TaskWorker _taskWorker;
+		private ITaskWorker _taskWorker;
 		
-		public delegate ActorHost Factory(TaskWorker taskWorker, IActorBuilder builder);
+		public delegate ActorHost Factory(ITaskWorker taskWorker, IActorBuilder builder);
 		
-		public ActorHost(TaskWorker taskWorker, IActorBuilder builder)
+		public ActorHost(ITaskWorker taskWorker, IActorBuilder builder)
 		{
 			_taskWorker = taskWorker;
 			_builder = builder;

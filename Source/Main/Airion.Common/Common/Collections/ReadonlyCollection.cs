@@ -115,7 +115,7 @@ namespace Airion.Common.Collections
 
 		#region Fields
 
-		private object _syncRoot;
+		private object _syncRoot = new object();
 
 		#endregion Fields 
 	}

@@ -34,7 +34,7 @@ namespace Airion.Parallels.PerformanceTests
 		{
 			const int ActionCount = 100000;
 			var container = BuildContainer();
-			var taskWorkerFactory = container.Resolve<TaskWorker.Factory>();
+			var taskWorkerFactory = container.Resolve<TaskWorkerFactory>();
 			using(var taskWorker = taskWorkerFactory(ApartmentState.MTA)) {
 				taskWorker.Start();
 				

@@ -3,10 +3,11 @@
 
 
 using System;
-using Airion.Testing;
-using NUnit.Framework;
-using Moq;
 using Airion.Parallels;
+using Airion.Persist.TransientProvider;
+using Airion.Testing;
+using Moq;
+using NUnit.Framework;
 
 namespace Airion.Persist.CQRS.Tests.Contracts
 {
@@ -16,16 +17,49 @@ namespace Airion.Persist.CQRS.Tests.Contracts
 		#region Steps
 		
 		public class Steps : AbstractSteps
-		{
+		{			
+			#region TestCommand
+			
+			private class TestCommand : ICommand
+			{
+				public int ExecuteCount { get; private set; }
+				public bool IsValid { get; set; }
+				
+				public TestCommand()
+				{
+					ExecuteCount = 0;
+					IsValid = true;
+				}
+				
+				public void Execute(CommandContext commandContext)
+				{
+					if(Verify(commandContext)) {					
+						ExecuteCount++;
+					}
+				}
+				
+				private bool Verify(CommandContext commandContext)
+				{
+					if(!IsValid) {
+						commandContext.AddError("Validation failed");
+					}
+					
+					return !commandContext.HasError;
+				}
+			}
+					
+			#endregion
+			
 			#region Data
 			
 			private Store _store;
 			private CommandBus _commandBus;
 			
 			// step data
-			private IWorkItem _commandWorkItem;
-			private bool _commandExecuted = false;
+			private ITaskHandle _commandHandle;
+			private TestCommand _command;
 			private Exception _commandExecutionException;
+			
 			
 			#endregion
 			
@@ -34,7 +68,7 @@ namespace Airion.Persist.CQRS.Tests.Contracts
 			protected override void BeforeScenario()
 			{
 				_store = new Store(new TransientConfiguration());
-				_commandBus = new CommandBus(_store);
+				_commandBus = new CommandBus(_store, appartmentState => new TaskWorker(appartmentState));
 			}
 			
 			protected override void AfterScenario()
@@ -49,30 +83,43 @@ namespace Airion.Persist.CQRS.Tests.Contracts
 			
 			public void ScheduleCommand()
 			{
-				
+				_command = new TestCommand();
+				_commandHandle = _commandBus.Schedule(_command);
 			}
+			
+			public void ScheduleInvalidCommand()
+			{
+				_command = new TestCommand() { IsValid = false };
+				_commandHandle = _commandBus.Schedule(_command);				
+			}
+			
+			public void WaitForCommand()
+			{
+				try {
+					_commandHandle.Wait();
+				} catch(System.Reflection.TargetInvocationException e) {
+					_commandExecutionException = e.InnerException;
+				}
+			}
+			
 			
 			#endregion
 			
 			#region Verification
-			#endregion
 			
-			#region Helpers
-			
-			private ICommand CreateMockCommand(bool isValid)
+			public void VerifyCommandWasExecuted()
 			{
-				Mock<ICommand> mockCommand = new Mock<ICommand>();
-				
-//					.Callback(context => { this._commandExecuted = true; });
-//				mockCommand.Setup(x => x.Verify)
-//					.Callback(
-//						context => {
-//							if(!isValid) {
-//								//context.x
-//							}
-//					});
+				Assert.That(_command.ExecuteCount, Is.EqualTo(1));
+			}
 			
-				return mockCommand.Object;
+			public void VerifyCommandWasNotExecuted()
+			{
+				Assert.That(_command.ExecuteCount, Is.EqualTo(0));
+			}
+			
+			public void VerifyValidationExeceptionWasThrown()
+			{
+				Assert.That(_commandExecutionException, Is.InstanceOf<CommandValidationException>());
 			}
 			
 			#endregion
@@ -83,7 +130,7 @@ namespace Airion.Persist.CQRS.Tests.Contracts
 		#region Tests
 		
 		[Test]
-		public void ScheduleCommand_CommandIsExecuted()
+		public void ScheduleCommand_VerificationPasses_CommandIsExecuted()
 		{
 			using(var steps = new Steps()) {
 				steps.ScheduleCommand();
@@ -93,7 +140,7 @@ namespace Airion.Persist.CQRS.Tests.Contracts
 		}
 		
 		[Test]
-		public void ScheduleCommand_VerificationFails_ReturnsAsyncHandleToCommandResult()
+		public void ScheduleCommand_VerificationFails_CommandIsNotExecuted()
 		{
 			using(var steps = new Steps()) {
 				steps.ScheduleInvalidCommand();

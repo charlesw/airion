@@ -11,6 +11,6 @@ namespace Airion.Parallels.Actors.Internal
 	public interface IActor
 	{			
 		object Subject { get; set; }
-		TaskWorker TaskWorker { get; set; }
+		ITaskWorker TaskWorker { get; set; }
 	}
 }

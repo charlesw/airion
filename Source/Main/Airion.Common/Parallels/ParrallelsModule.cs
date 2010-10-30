@@ -26,7 +26,7 @@ namespace Airion.Parallels
 			builder.RegisterType<ActorBuilder>().As<IActorBuilder>();
 			
 			// external
-			builder.RegisterType<TaskWorker>();
+			builder.RegisterType<TaskWorker>().As<ITaskWorker>();
 			builder.RegisterType<ActorHost>();
 			builder.RegisterType<ActorHostBuilder>();
 		}

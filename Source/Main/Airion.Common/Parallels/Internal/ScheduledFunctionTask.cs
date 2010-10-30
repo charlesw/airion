@@ -12,10 +12,11 @@ namespace Airion.Parallels.Internal
 {
 	public sealed class ScheduledFunctionTask<TResult> : BaseScheduledTask<TResult>
 	{
-		public ScheduledFunctionTask(Func<TResult> function, CancellationToken cancellationToken)
+		public ScheduledFunctionTask(Func<TResult> function, Action callbackAction, CancellationToken cancellationToken)
 			: base(cancellationToken)
 		{
 			Function = function;
+			CallbackAction = callbackAction;
 		}
 		
 		protected override void ExecuteTask()
@@ -23,6 +24,14 @@ namespace Airion.Parallels.Internal
 			Result = Function();
 		}
 		
+		protected override void WaitCompleted()
+		{
+			if(CallbackAction != null) {
+				CallbackAction();
+			}
+		}
+		
 		public Func<TResult> Function { get; private set; }
+		public Action CallbackAction { get; private set; }
 	}
 }
