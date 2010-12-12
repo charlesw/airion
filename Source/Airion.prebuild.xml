@@ -193,7 +193,7 @@
 				</Files>
 			</Project>
 			
-			<Project name="Airion.MVC"
+			<!--<Project name="Airion.MVC"
 			         path="Main/Airion.MVC"
 			         assemblyName="Airion.MVC"
 			         language="C#"
@@ -220,7 +220,7 @@
 				<Files>
 					<Match buildAction="Compile" pattern="*.cs" recurse="true"/>
 				</Files>
-			</Project>
+			</Project>-->
 			
 			<Project name="Airion.Testing"
 			         path="Main/Airion.Testing"
@@ -426,7 +426,7 @@
 				</Files>
 			</Project>
 			
-			<Project name="Airion.MVC.Tests"
+			<!--<Project name="Airion.MVC.Tests"
 			         path="./Tests/Airion.MVC.Tests"
 			         language="C#"
 			         type="Library"
@@ -448,7 +448,7 @@
 				<Files>
 					<Match buildAction="Compile" pattern="*.cs" recurse="true"/>
 				</Files>
-			</Project>
+			</Project>-->
 						
 			<Project name="Airion.TestRunner"
 			         path="./Tests/Airion.TestRunner"
@@ -478,7 +478,7 @@
 				<Reference name="Airion.Persist.TransientProvider" localCopy="true"/>
 				<Reference name="Airion.Persist.NHibernateProvider" localCopy="true"/>				
 				<Reference name="Airion.Persist.CQRS" localCopy="true"/>
-				<Reference name="Airion.MVC" localCopy="true"/>
+				<!--<Reference name="Airion.MVC" localCopy="true"/>-->
 				<Reference name="Airion.Testing" localCopy="true"/>
 				
 				<Reference name="Airion.Common.Tests" localCopy="true"/>
