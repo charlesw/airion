@@ -11,9 +11,9 @@ using NUnit.Framework;
 using Autofac;
 using Airion.Common;
 using Airion.Parallels.Actors;
-using Airion.Parallels.Tests;
+using Airion.Common.Tests.Contracts.Parallels;
 
-namespace Airion.Parallels.ActorModel.Tests
+namespace Airion.Common.Tests.Contracts.ActorModel
 {
 	[TestFixture]
 	public class ActorSpec : ParallelsAutofacTestBase

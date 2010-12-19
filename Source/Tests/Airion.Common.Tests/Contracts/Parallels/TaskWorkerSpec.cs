@@ -6,10 +6,11 @@
 
 using System;
 using System.Threading;
-using NUnit.Framework;
+using Airion.Parallels;
 using Autofac;
+using NUnit.Framework;
 
-namespace Airion.Parallels.Tests
+namespace Airion.Common.Tests.Contracts.Parallels
 {
 	[TestFixture]
 	public class TaskWorkerSpec : ParallelsAutofacTestBase

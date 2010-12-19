@@ -6,7 +6,7 @@
 
 using System;
 
-namespace Airion.Parallels.Examples.ChatRoom
+namespace Airion.Common.Tests.Support.Examples.ChatRoom
 {
 	/// <summary>
 	/// Description of ChatMessageEventArgs.

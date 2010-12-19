@@ -3,9 +3,10 @@
 
 using System;
 using System.Threading;
+using Airion.Parallels.Internal;
 using NUnit.Framework;
 
-namespace Airion.Parallels.Internal.Tests
+namespace Airion.Common.Tests.Contracts.Parallels.Internal
 {
 	[TestFixture]
 	public class QueuedPendingWorkSpec : PendingWorkSpec

@@ -4,6 +4,7 @@
 using System;
 using System.Linq;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using System.Reflection;
 
 namespace Airion.Common
@@ -97,6 +98,25 @@ namespace Airion.Common
 			} else {
 				return null;
 			}
+		}
+		
+		/// <summary>
+		/// Gets the name of the property referenced in the expression.
+		/// </summary>
+		/// <remarks>
+		/// Note that this function while simple does involve a fair amout of work.
+		/// Consider caching the result if used frequently.
+		/// </remarks>
+		/// <param name="expression">The lamba expression that references the property.</param>
+		/// <returns>The name of the property referenced in the lamba expression.</returns>
+		public static string GetPropertyName<TObject, TValue>(Expression<Func<TObject, TValue>> expression)
+		{
+			var member = expression.Body as MemberExpression;
+		    if (member != null)
+		        return member.Member.Name;
+		
+		    throw new ArgumentException("Expression is not a member access", "expression");
+
 		}
 	}
 }

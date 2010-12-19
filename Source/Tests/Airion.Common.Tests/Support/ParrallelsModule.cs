@@ -6,12 +6,13 @@
 
 using System;
 using System.Threading;
-using Autofac;
+using Airion.Parallels;
 using Airion.Parallels.Actors;
 using Airion.Parallels.Actors.Internal;
 using Airion.Parallels.Internal;
+using Autofac;
 
-namespace Airion.Parallels
+namespace Airion.Common.Tests.Support
 {
 	/// <summary>
 	/// Description of ParrallelsModule.

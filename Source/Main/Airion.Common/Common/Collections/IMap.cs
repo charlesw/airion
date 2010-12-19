@@ -11,7 +11,6 @@ namespace Airion.Common.Collections
 	/// Description of IMap.
 	/// </summary>
 	public interface IMap<TKey, TItem> : ICollection<TItem>, IEnumerable<TItem>
-		where TItem : IIdentifiable<TKey>
 	{
 		bool ContainsKey(TKey key);
 		 
@@ -19,7 +18,7 @@ namespace Airion.Common.Collections
 		
 		TItem this[TKey key]
 		{
-			get; set;
+			get;
 		}
 		
 		bool Remove(TKey key);	

@@ -6,10 +6,12 @@
 
 using System;
 using Airion.Common;
+using Airion.Common.Tests.Support;
+using Airion.Parallels;
 using Airion.Testing;
 using Autofac;
 
-namespace Airion.Parallels.Tests
+namespace Airion.Common.Tests.Contracts.Parallels
 {
 	public class ParallelsAutofacTestBase : AutoFacTestBase
 	{

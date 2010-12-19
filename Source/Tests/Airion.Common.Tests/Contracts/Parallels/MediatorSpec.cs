@@ -6,11 +6,12 @@
 
 
 using System;
-using NUnit.Framework;
-using Airion.Parallels.Examples.ChatRoom;
+using Airion.Common.Tests.Support.Examples.ChatRoom;
+using Airion.Parallels;
 using Airion.Testing;
+using NUnit.Framework;
 
-namespace Airion.Parallels.Tests
+namespace Airion.Common.Tests.Contracts.Parallels
 {
 	[TestFixture]
 	public class MediatorSpec

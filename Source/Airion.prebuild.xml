@@ -59,7 +59,6 @@
 				<Reference name="System.Core"/>
 				<Reference name="System.Data" />		
 				
-				<Reference name="Autofac" path="../../Libraries/Autofac" localCopy="true" />
 				<Reference name="Castle.Core" path="../../Libraries/Castle.Core" localCopy="true" />
 				
 				
@@ -486,7 +485,7 @@
 				<Reference name="Airion.Persist.TransientProvider.Tests" localCopy="true"/>
 				<Reference name="Airion.Persist.NHibernateProvider.Tests" localCopy="true"/>			
 				<Reference name="Airion.Persist.CQRS.Tests" localCopy="true"/>
-				<Reference name="Airion.MVC.Tests" localCopy="true"/>
+				<!--<Reference name="Airion.MVC.Tests" localCopy="true"/>-->
 				
 				<Files>
 					<File buildAction="None">app.config</File>

@@ -8,12 +8,14 @@
 using System;
 using System.Diagnostics;
 using System.Threading;
-using NUnit.Framework;
-using Autofac;
-using Airion.Parallels.Tests;
-using Airion.Testing;
 
-namespace Airion.Parallels.PerformanceTests
+using Airion.Common.Tests.Contracts.Parallels;
+using Airion.Parallels;
+using Airion.Testing;
+using Autofac;
+using NUnit.Framework;
+
+namespace Airion.Common.Tests.Contracts.Parallels.PerformanceTests
 {
 	[TestFixture]
 	public class TestWorkerPerformanceTests : ParallelsAutofacTestBase

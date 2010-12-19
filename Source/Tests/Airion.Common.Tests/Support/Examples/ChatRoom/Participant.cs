@@ -10,7 +10,7 @@ using System.Collections.Generic;
 using Airion.Common;
 using Airion.Testing;
 
-namespace Airion.Parallels.Examples.ChatRoom
+namespace Airion.Common.Tests.Support.Examples.ChatRoom
 {
 	public class Participant : LightDisposableBase
 	{

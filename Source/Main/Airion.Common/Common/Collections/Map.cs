@@ -3,27 +3,36 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 
 namespace Airion.Common.Collections
 {
-	/// <summary>
-	/// Description of Map.
-	/// </summary>
 	public class Map<TKey, TItem> : CollectionBase<TItem> , IMap<TKey, TItem>, IFreezable
-		where TItem : IIdentifiable<TKey>
 	{
+		#region Fields
+
+		private bool isFrozen = false;
+		protected Dictionary<TKey, TItem> items = new Dictionary<TKey, TItem>();
+		private Func<TItem, TKey> _getKeyFromItem;
+		private string _itemKeyName;
+		
+		#endregion Fields
+		
 		#region Constructors
 
-		public Map(IEnumerable<TItem> collection)
+		public Map(Expression<Func<TItem, TKey>> itemKeyPropertySelector, IEnumerable<TItem> collection)
+			: this(itemKeyPropertySelector)
 		{
 			foreach(TItem item in collection) {
 				Guard.Require("collection", item != null, "Collection must not contain null items.");
-				items.Add(item.Key, item);
+				items.Add(GetItemKey(item), item);
 			}
 		}
 
-		public Map()
+		public Map(Expression<Func<TItem, TKey>> itemKeyPropertySelector)
 		{
+			_getKeyFromItem = itemKeyPropertySelector.Compile();
+			_itemKeyName = ReflectionUtilities.GetPropertyName(itemKeyPropertySelector);
 		}
 
 		#endregion Constructors
@@ -35,7 +44,7 @@ namespace Airion.Common.Collections
 		public override void Add(TItem item)
 		{
 			CheckFrozenState();
-			items.Add(item.Key, item);
+			items.Add(GetItemKey(item), item);
 			OnItemAdded(item);
 		}
 
@@ -48,7 +57,7 @@ namespace Airion.Common.Collections
 
 		public override bool Contains(TItem item)
 		{
-			return items.ContainsKey(item.Key);
+			return items.ContainsKey(GetItemKey(item));
 		}
 
 		public bool ContainsKey(TKey key)
@@ -71,7 +80,7 @@ namespace Airion.Common.Collections
 		{
 			CheckFrozenState();
 			bool success = false;
-			if(items.Remove(item.Key)) {
+			if(items.Remove(GetItemKey(item))) {
 				OnItemRemoved(item);
 				success = true;
 			}
@@ -111,24 +120,34 @@ namespace Airion.Common.Collections
 			Guard.Operation(!isFrozen, "Cannot modify a frozen object.");
 		}
 
-		protected virtual void OnClearing()
-		{
-			
-		}
-
 		protected virtual void OnFreeze()
 		{
 			
 		}
 
-		protected virtual void OnItemAdded(TItem item)
+		protected virtual void OnClearing()
 		{
-			
+			foreach(var item in items.Values) {
+				var notifiableItem = item as INotifyPropertyChanging;
+				if(notifiableItem != null) {
+					notifiableItem.PropertyChanging -= ItemPropertyChanging;
+				}
+			}
 		}
 
+		protected virtual void OnItemAdded(TItem item)
+		{
+			var notifiableItem = item as INotifyPropertyChanging;
+			if(notifiableItem != null) {
+				notifiableItem.PropertyChanging += ItemPropertyChanging;
+			}
+		}
 		protected virtual void OnItemRemoved(TItem item)
 		{
-			
+			var notifiableItem = item as INotifyPropertyChanging;
+			if(notifiableItem != null) {
+				notifiableItem.PropertyChanging -= ItemPropertyChanging;
+			}
 		}
 
 		protected virtual void TransferMembers(Map<TKey, TItem> clone)
@@ -136,13 +155,34 @@ namespace Airion.Common.Collections
 			clone.items = new Dictionary<TKey, TItem>();
 			foreach(TItem item in items.Values) {
 				if(item is IFreezable) {
-					clone.items.Add(item.Key, (TItem)((IFreezable)item).Thaw());
+					clone.items.Add(GetItemKey(item), (TItem)((IFreezable)item).Thaw());
 				} else {
-					clone.items.Add(item.Key, item);
+					clone.items.Add(GetItemKey(item), item);
 				}
 			}
 		}
 
+		protected TKey GetItemKey(TItem item)
+		{
+			return _getKeyFromItem(item);
+		}
+
+
+		private void ItemPropertyChanging(object sender, PropertyChangingEventArgs e)
+		{
+			if(e.PropertyName == _itemKeyName) {
+				CheckFrozenState();
+				TKey newValue = (TKey)e.NewValue;
+				if(items.ContainsKey(newValue)) {
+					throw new ArgumentException(String.Format("Another item with the key '{0}' already exists.", newValue), e.PropertyName);
+				} else {
+					TKey oldValue = (TKey)e.OldValue;
+					items.Remove(oldValue);
+					items.Add(newValue, (TItem)sender);
+				}
+				
+			}			
+		}
 
 		#endregion Methods
 
@@ -163,28 +203,8 @@ namespace Airion.Common.Collections
 		public TItem this[TKey key]
 		{
 			get { return items[key]; }
-			set	{
-				CheckFrozenState();
-				TItem item;
-				if(items.TryGetValue(key, out item)) {
-					if(!Object.ReferenceEquals(item, value)) {
-						items[key] = value;
-						OnItemRemoved(item);
-						OnItemAdded(item);
-					}
-				} else {
-					items[key] = value;
-				}
-			}
 		}
 
 		#endregion Properties
-
-		#region Fields
-
-		private bool isFrozen = false;
-		protected Dictionary<TKey, TItem> items = new Dictionary<TKey, TItem>();
-
-		#endregion Fields
 	}
 }

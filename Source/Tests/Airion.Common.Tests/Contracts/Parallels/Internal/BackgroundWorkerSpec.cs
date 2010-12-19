@@ -7,12 +7,13 @@
 
 using System;
 using System.Threading;
-using NUnit.Framework;
+using Airion.Common.Tests.Contracts.Parallels;
 using Airion.Parallels.Extensions;
-using Airion.Parallels.Tests;
+using Airion.Parallels.Internal;
 using Autofac;
+using NUnit.Framework;
 
-namespace Airion.Parallels.Internal.Tests
+namespace Airion.Common.Tests.Contracts.Parallels.Internal
 {
 	[TestFixture]
 	public class BackgroundWorkerSpec : ParallelsAutofacTestBase
