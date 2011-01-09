@@ -5,6 +5,8 @@ using System;
 using System.Linq;
 using Airion.Common;
 using Airion.Persist.Provider;
+using NHibernate;
+using NHibernate.Linq;
 
 namespace Airion.Persist.Internal
 {
@@ -13,11 +15,11 @@ namespace Airion.Persist.Internal
 	/// </summary>
 	public class Conversation : DisposableBase, IConversation
 	{
-		private SessionAndTransactionManager _sessionAndTransactionManager;
+		private ISessionAndTransactionManager _sessionAndTransactionManager;
 		
-		public Conversation(IPersistenceProvider provider)
+		public Conversation(IPersistenceProvider provider, CreateSessionAndTransactionManager createManager)
 		{
-			_sessionAndTransactionManager = new SessionAndTransactionManager(provider);
+			_sessionAndTransactionManager = createManager(provider);
 		}
 		
 		protected override void Dispose(bool disposing)
@@ -61,7 +63,7 @@ namespace Airion.Persist.Internal
 			GetSession().Delete(entity);
 		}
 		
-		private ISession GetSession()
+		public ISession GetSession()
 		{
 			return _sessionAndTransactionManager.Session;
 		}

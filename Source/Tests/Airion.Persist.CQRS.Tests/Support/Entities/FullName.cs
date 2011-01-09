@@ -11,6 +11,8 @@ namespace Airion.Persist.CQRS.Tests.Support
 	/// </summary>
 	public class FullName
 	{
+		protected FullName() {}
+		
 		public FullName(string firstName, string lastName)
 		{
 			Guard.RequireNotNullOrEmpty("firstName", firstName);

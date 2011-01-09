@@ -1,6 +1,5 @@
 ﻿using System;
-using Airion.Persist.NHibernateProvider.Tests;
-using Airion.Persist.NHibernateProvider.Tests.Contract;
+using Airion.Persist.Tests.Contract;
 
 namespace Airion.TestRunner
 {
@@ -9,7 +8,7 @@ namespace Airion.TestRunner
 		public static void Main(string[] args)
 		{
 			var testFixture = new NHibernateConversationTests();
-			testFixture.Update_EntityExists_EntityIsUpdated();
+			testFixture.Get_EntityDoesntExist_ReturnsNull();
 			
 		}
 	}

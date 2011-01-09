@@ -4,8 +4,12 @@
 
 using System;
 using Airion.Parallels;
-using Airion.Persist.TransientProvider;
+using Airion.Persist;
+using Airion.Persist.CQRS.Tests.Support.Mappings;
+using Airion.Persist.Internal;
+using Airion.Persist.Provider;
 using Airion.Testing;
+using FluentNHibernate.Cfg.Db;
 using Moq;
 using NUnit.Framework;
 
@@ -67,7 +71,11 @@ namespace Airion.Persist.CQRS.Tests.Contracts
 			
 			protected override void BeforeScenario()
 			{
-				_store = new Store(new TransientConfiguration());
+				var configuration = new NHibernateConfiguration(provider => new TransientSessionAndTransactionManager(provider))
+					.Database(SQLiteConfiguration.Standard.InMemory())
+					.Mappings(x => x.FluentMappings
+					          .AddFromAssemblyOf<RecipeMap>());
+				_store = new Store(configuration);
 				_commandBus = new CommandBus(_store, appartmentState => new TaskWorker(appartmentState));
 			}
 			

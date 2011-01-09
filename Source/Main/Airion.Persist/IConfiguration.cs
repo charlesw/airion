@@ -3,6 +3,7 @@
 
 using System;
 using Airion.Common;
+using Airion.Persist.Internal;
 using Airion.Persist.Provider;
 
 namespace Airion.Persist
@@ -15,5 +16,7 @@ namespace Airion.Persist
 		IPersistenceProvider BuildProvider();
 		
 		IValueStore<IConversation> BuildValueStore();
+		
+		CreateSessionAndTransactionManager CreateSessionAndTransactionManager { get; }
 	}
 }

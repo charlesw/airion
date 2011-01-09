@@ -3,13 +3,14 @@
 
 using System;
 using Airion.Common;
+using Airion.Persist.Internal;
 using Airion.Persist.Provider;
 using FluentNHibernate;
 using FluentNHibernate.Cfg;
 using FluentNHibernate.Cfg.Db;
 using NHibernate.Cfg;
 
-namespace Airion.Persist.NHibernateProvider
+namespace Airion.Persist.Provider
 {
 	public delegate IValueStore<IConversation> ConversationStoreFactory();
 	
@@ -21,12 +22,20 @@ namespace Airion.Persist.NHibernateProvider
 		private IPersistenceConfigurer _persistenceConfigurer;
 		private Action<MappingConfiguration> _mappings;
 		private ConversationStoreFactory _conversationStoreFactory;
+		private CreateSessionAndTransactionManager _createSessionAndTransactionManager;
 		
 		public NHibernateConfiguration()
 		{
 			_conversationStoreFactory = () => new CallLocalValueStore<IConversation>();
+			_createSessionAndTransactionManager = (IPersistenceProvider provider) => new SessionAndTransactionManager(provider);
 		}
 		
+		public NHibernateConfiguration(CreateSessionAndTransactionManager createSessionAndTransactionManager)
+		{
+			_conversationStoreFactory = () => new CallLocalValueStore<IConversation>();
+			_createSessionAndTransactionManager = createSessionAndTransactionManager;
+		}
+			
 		public NHibernateConfiguration Database(IPersistenceConfigurer persistenceConfigurer) 
 		{
 			_persistenceConfigurer = persistenceConfigurer;
@@ -43,6 +52,11 @@ namespace Airion.Persist.NHibernateProvider
 		{
 			_conversationStoreFactory = conversationStoreFactory;
 			return this;
+		}
+		
+		CreateSessionAndTransactionManager IConfiguration.CreateSessionAndTransactionManager 
+		{
+			get { return _createSessionAndTransactionManager; }
 		}
 		
 		IPersistenceProvider IConfiguration.BuildProvider()

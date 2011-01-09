@@ -7,7 +7,7 @@ using Airion.Persist.Provider;
 using NHibernate;
 using NHibernate.Cfg;
 
-namespace Airion.Persist.NHibernateProvider
+namespace Airion.Persist.Provider
 {
 	/// <summary>
 	/// Description of NHibernateProvider.
@@ -23,24 +23,12 @@ namespace Airion.Persist.NHibernateProvider
 		}
 		
 		public NHibernate.Cfg.Configuration Configuration { get; private set; }
-		
-		public event EventHandler<SessionEventArgs> SessionOpened;
-		
-		public Airion.Persist.Provider.ISession OpenSession()
+				
+		public ISession OpenSession()
 		{
 			CheckState();
 			
-			var nhSession = _sessionFactory.OpenSession();
-			var session = new NHibernateSession(this, nhSession);
-			OnSessionOpened(new SessionEventArgs(session));
-			return session;
-		}
-		
-		protected virtual void OnSessionOpened(SessionEventArgs args)
-		{
-			if(SessionOpened != null) {
-				SessionOpened(this, args);
-			}
+			return _sessionFactory.OpenSession();
 		}
 		
 		protected override void Dispose(bool disposing)

@@ -1,5 +1,9 @@
 ﻿<NUnitProject>
-  <Settings activeconfig="Debug" />
-  <Config name="Debug" binpathtype="Auto" />
+  <Settings activeconfig="Debug" processModel="Separate" domainUsage="Multiple" />
+  <Config name="Debug" appbase="Test Binaries\Debug" binpathtype="Auto" runtimeFramework="net">
+    <assembly path="Airion.Common.Tests.dll" />
+    <assembly path="Airion.Persist.CQRS.Tests.dll" />
+    <assembly path="Airion.Persist.Tests.dll" />
+  </Config>
   <Config name="Release" binpathtype="Auto" />
 </NUnitProject>

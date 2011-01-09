@@ -4,9 +4,13 @@
 
 using System;
 using System.Linq;
-using Airion.Persist.TransientProvider;
-using NUnit.Framework;
+using Airion.Persist;
+using Airion.Persist.CQRS.Tests.Support.Mappings;
+using Airion.Persist.Internal;
+using Airion.Persist.Provider;
 using Airion.Testing;
+using FluentNHibernate.Cfg.Db;
+using NUnit.Framework;
 
 namespace Airion.Persist.CQRS.Tests.Contracts
 {
@@ -29,7 +33,11 @@ namespace Airion.Persist.CQRS.Tests.Contracts
 			
 			protected override void BeforeScenario()
 			{
-				_store = new Store(new TransientConfiguration());
+				var configuration = new NHibernateConfiguration(provider => new TransientSessionAndTransactionManager(provider))
+					.Database(SQLiteConfiguration.Standard.InMemory())
+					.Mappings(x => x.FluentMappings
+					          .AddFromAssemblyOf<RecipeMap>());
+				_store = new Store(configuration);
 				_conversation = _store.BeginConversation();
 				_context = new CommandContext(_conversation);
 			}

@@ -11,6 +11,8 @@ namespace Airion.Persist.CQRS.Tests.Support
 	/// </summary>
 	public class MethodStep : Entity<Guid>
 	{		
+		protected MethodStep() {}
+		
 		public MethodStep(Recipe recipe)
 		{
 			Rescipe = recipe;

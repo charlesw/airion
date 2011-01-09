@@ -2,6 +2,7 @@
 // This code is distributed under the GNU LGPL (for details please see ~\Documentation\license.txt)
 
 using System;
+using NHibernate;
 
 namespace Airion.Persist.Provider
 {
@@ -11,7 +12,7 @@ namespace Airion.Persist.Provider
 	public interface IPersistenceProvider : IDisposable
 	{
 		ISession OpenSession();
-		
-		event EventHandler<SessionEventArgs> SessionOpened;
+				
+		NHibernate.Cfg.Configuration Configuration { get;  }
 	}
 }

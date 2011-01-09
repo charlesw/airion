@@ -17,12 +17,14 @@ namespace Airion.Persist
 		private IConfiguration _configuration;
 		private IPersistenceProvider _persistenceProvider;
 		private IValueStore<IConversation> _currentConversation;
+		private CreateSessionAndTransactionManager _createSessionAndTransactionManager;
 		
 		public Store(IConfiguration configuration)
 		{
 			_configuration = configuration;
 			_persistenceProvider = _configuration.BuildProvider();
 			_currentConversation = _configuration.BuildValueStore();
+			_createSessionAndTransactionManager = _configuration.CreateSessionAndTransactionManager;
 		}
 		
 		public IPersistenceProvider PersistenceProvider
@@ -34,7 +36,7 @@ namespace Airion.Persist
 		{
 			Guard.Operation(CurrentConversation == null, "There is already an active conversation.");
 			
-			var conversation = new Conversation(_persistenceProvider);
+			var conversation = new Conversation(_persistenceProvider, _createSessionAndTransactionManager);
 			conversation.Disposed += ConversationDisposed;		
 			CurrentConversation = conversation;
 			return conversation;

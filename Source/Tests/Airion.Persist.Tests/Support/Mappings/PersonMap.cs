@@ -5,7 +5,7 @@ using System;
 using Airion.Persist.Tests.Support.Domain;
 using FluentNHibernate.Mapping;
 
-namespace Airion.Persist.NHibernateProvider.Tests.Support
+namespace Airion.Persist.Tests.Support
 {
 	/// <summary>
 	/// Description of PersonMap.

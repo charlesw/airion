@@ -7,11 +7,11 @@ using System.Linq;
 using Airion.Common;
 using Airion.Persist.Provider;
 using Airion.Persist.Tests.Support.Domain;
-using MbUnit.Framework;
+using NUnit.Framework;
 
 namespace Airion.Persist.Tests.Contracts
 {
-	[TestFixture, Parallelizable(TestScope.All)]
+	[TestFixture]
 	public abstract class ConversationTests
 	{
 		public class Steps : LightDisposableBase
@@ -81,8 +81,8 @@ namespace Airion.Persist.Tests.Contracts
 			
 			public void VerifyPersonQuery(IEnumerable<Person> expectedResult)
 			{
-				Assert.IsInstanceOfType<IQueryable<Person>>(personQuery);
-				Assert.AreElementsEqualIgnoringOrder(expectedResult, personQuery);
+				Assert.That(personQuery, Is.InstanceOf<IQueryable<Person>>());
+				Assert.That(personQuery, Is.EquivalentTo(expectedResult) );
 			}
 
 			public void VerifyRetrievedPerson(Person expectedPerson)
@@ -122,11 +122,8 @@ namespace Airion.Persist.Tests.Contracts
 		}
 		
 		[Test]
-		[Row(0)]
-		[Row(10)]
-		[NUnit.Framework.Test]
-		[NUnit.Framework.TestCase(0)]
-		[NUnit.Framework.TestCase(10)]
+		[TestCase(0)]
+		[TestCase(10)]
 		public void Linq_ReturnsQueryableSetOfEntities(int count)
 		{
 			using(var store = new Store(BuildConfiguration())) {
@@ -149,7 +146,6 @@ namespace Airion.Persist.Tests.Contracts
 		}
 		
 		[Test]
-		[NUnit.Framework.Test]
 		public void Update_EntityExists_EntityIsUpdated()
 		{
 			using(var store = new Store(BuildConfiguration())) {
@@ -172,7 +168,6 @@ namespace Airion.Persist.Tests.Contracts
 		}
 		
 		[Test]
-		[NUnit.Framework.Test]
 		public void Update_EntityDoesntExists_ThrowInvalidOperationException()
 		{
 			using(var store = new Store(BuildConfiguration())) {
@@ -191,7 +186,6 @@ namespace Airion.Persist.Tests.Contracts
 		}
 		
 		[Test]
-		[NUnit.Framework.Test]
 		public void Save_EntityExists_ThrowInvalidOperationException()
 		{
 			using(var store = new Store(BuildConfiguration())) {
@@ -211,7 +205,6 @@ namespace Airion.Persist.Tests.Contracts
 		}
 		
 		[Test]
-		[NUnit.Framework.Test]
 		public void Save_EntityDoesntExists_EntityIsAddedAndIdIsAssigned()
 		{
 			using(var store = new Store(BuildConfiguration())) {
@@ -234,7 +227,6 @@ namespace Airion.Persist.Tests.Contracts
 		}
 		
 		[Test]
-		[NUnit.Framework.Test]
 		public void SaveOrUpdate_EntityExists_EntityIsUpdated()
 		{
 			using(var store = new Store(BuildConfiguration())) {
@@ -257,7 +249,6 @@ namespace Airion.Persist.Tests.Contracts
 		}
 		
 		[Test]
-		[NUnit.Framework.Test]
 		public void SaveOrUpdate_EntityDoesntExists_EntityIsAddedAndIdIsAssigned()
 		{
 			using(var store = new Store(BuildConfiguration())) {
@@ -280,7 +271,6 @@ namespace Airion.Persist.Tests.Contracts
 		}
 		
 		[Test]
-		[NUnit.Framework.Test]
 		public void Get_EntityExists_ReturnsCorrespondingEntity()
 		{
 			using(var store = new Store(BuildConfiguration())) {
@@ -303,7 +293,6 @@ namespace Airion.Persist.Tests.Contracts
 		}
 		
 		[Test]
-		[NUnit.Framework.Test]
 		public void Get_EntityDoesntExist_ReturnsNull()
 		{
 			using(var store = new Store(BuildConfiguration())) {
@@ -323,7 +312,6 @@ namespace Airion.Persist.Tests.Contracts
 		}
 		
 		[Test]
-		[NUnit.Framework.Test]
 		public void Delete_EntityExists_EntityIsRemoved()
 		{
 			using(var store = new Store(BuildConfiguration())) {
@@ -346,7 +334,6 @@ namespace Airion.Persist.Tests.Contracts
 		}
 		
 		[Test]
-		[NUnit.Framework.Test]
 		public void Delete_EntityDoesntExists_NoChange()
 		{
 			using(var store = new Store(BuildConfiguration())) {

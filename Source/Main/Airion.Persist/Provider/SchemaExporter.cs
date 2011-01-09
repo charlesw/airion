@@ -5,7 +5,7 @@ using System;
 using System.IO;
 using NHibernate.Tool.hbm2ddl;
 
-namespace Airion.Persist.NHibernateProvider
+namespace Airion.Persist.Provider
 {
 	/// <summary>
 	/// Description of SchemaExporter.
