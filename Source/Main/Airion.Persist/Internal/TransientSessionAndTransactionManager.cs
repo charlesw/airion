@@ -22,7 +22,7 @@ namespace Airion.Persist.Internal
 		protected override void OnBeginTransaction(ITransaction transaction)
 		{			
 			using(var standardOutput = new StreamWriter(Console.OpenStandardOutput())) {
-				new SchemaExport(Provider.Configuration).Execute(true, true, false, Session.Connection, standardOutput);
+				 new SchemaExport(Provider.Configuration).Execute(false, true, false, Session.Connection, standardOutput);
 			}
 			base.OnBeginTransaction(transaction);
 		}

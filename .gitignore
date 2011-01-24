@@ -2,3 +2,9 @@ Binaries/*
 Binaries/**
 Test Binaries/*
 Test Binaries/**
+/TestResult.xml
+/Airion.VisualState.xml
+/Source/Libraries/FluentNHibernate/FluentNHibernate.pdb
+/Source/Libraries/FluentNHibernate/Iesi.Collections.pdb
+/Source/Libraries/FluentNHibernate/NHibernate.ByteCode.Castle.pdb
+/Source/Libraries/FluentNHibernate/NHibernate.pdb

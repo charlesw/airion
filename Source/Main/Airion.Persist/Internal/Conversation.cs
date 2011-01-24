@@ -40,7 +40,7 @@ namespace Airion.Persist.Internal
 		
 		public IQueryable<T> Linq<T>()
 		{
-			return GetSession().Linq<T>();
+			return GetSession().Query<T>();
 		}
 		
 		public void Update<T>(T entity)

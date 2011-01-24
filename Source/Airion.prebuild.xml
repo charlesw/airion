@@ -88,6 +88,12 @@
 				<Reference name="System"/>
 				<Reference name="System.Core"/>
 				<Reference name="System.Data" />		
+								
+				<Reference name="FluentNHibernate" path="../../Libraries/FluentNHibernate" localCopy="true" />
+				<Reference name="NHibernate" path="../../Libraries/FluentNHibernate" localCopy="true" />
+				<!--<Reference name="Remotion.Data.Linq.dll" path="../../Libraries/FluentNHibernate" localCopy="true" />-->
+				<Reference name="NHibernate.ByteCode.Castle" path="../../Libraries/FluentNHibernate" localCopy="true" />
+				<Reference name="System.Data.SQLite" path="../../Libraries/SQLite" localCopy="true" />
 				
 				<Reference name="Airion.Common" localCopy="true" />					
 				<Reference name="Airion.Persist" localCopy="true" />	
@@ -118,108 +124,19 @@
 				<Reference name="System"/>
 				<Reference name="System.Core"/>
 				<Reference name="System.Data" />		
-				
-				<Reference name="Airion.Common" localCopy="true" />	
-				
-				<Files>
-					<Match buildAction="Compile" pattern="*.cs" recurse="true"/>
-				</Files>
-			</Project>
-			
-			<Project name="Airion.Persist.TransientProvider"
-			         path="Main/Airion.Persist.TransientProvider"
-			         assemblyName="Airion.Persist.TransientProvider"
-			         language="C#"
-			         type="Library"
-			         frameworkVersion="v4_0">
-				
-				<Configuration name="Debug" platform="x86">
-					<Options>
-						<AllowUnsafe>true</AllowUnsafe>
-					</Options>
-				</Configuration>
-				<Configuration name="Release" platform="x86">
-					<Options>
-						<AllowUnsafe>true</AllowUnsafe>
-					</Options>
-				</Configuration>
-				
-				<Reference name="System"/>
-				<Reference name="System.Core"/>
-				<Reference name="System.Data" />		
 								
-				<Reference name="Airion.Common" localCopy="true" />	
-				<Reference name="Airion.Persist" localCopy="true" />	
-				
-				<Files>
-					<Match buildAction="Compile" pattern="*.cs" recurse="true"/>
-				</Files>
-			</Project>
-			
-			<Project name="Airion.Persist.NHibernateProvider"
-			         path="Main/Airion.Persist.NHibernateProvider"
-			         assemblyName="Airion.Persist.NHibernateProvider"
-			         language="C#"
-			         type="Library"
-			         frameworkVersion="v4_0">
-				
-				<Configuration name="Debug" platform="x86">
-					<Options>
-						<AllowUnsafe>true</AllowUnsafe>
-					</Options>
-				</Configuration>
-				<Configuration name="Release" platform="x86">
-					<Options>
-						<AllowUnsafe>true</AllowUnsafe>
-					</Options>
-				</Configuration>
-				
-				<Reference name="System"/>
-				<Reference name="System.Core"/>
-				<Reference name="System.Data" />	
-							
 				<Reference name="FluentNHibernate" path="../../Libraries/FluentNHibernate" localCopy="true" />
 				<Reference name="NHibernate" path="../../Libraries/FluentNHibernate" localCopy="true" />
-				<Reference name="NHibernate.Linq" path="../../Libraries/FluentNHibernate" localCopy="true" />
+				<!--<Reference name="Remotion.Data.Linq.dll" path="../../Libraries/FluentNHibernate" localCopy="true" />-->
 				<Reference name="NHibernate.ByteCode.Castle" path="../../Libraries/FluentNHibernate" localCopy="true" />
 				<Reference name="System.Data.SQLite" path="../../Libraries/SQLite" localCopy="true" />
 				
 				<Reference name="Airion.Common" localCopy="true" />	
-				<Reference name="Airion.Persist" localCopy="true" />	
 				
 				<Files>
 					<Match buildAction="Compile" pattern="*.cs" recurse="true"/>
 				</Files>
-			</Project>
-			
-			<!--<Project name="Airion.MVC"
-			         path="Main/Airion.MVC"
-			         assemblyName="Airion.MVC"
-			         language="C#"
-			         type="Library"
-			         frameworkVersion="v4_0">
-				
-				<Configuration name="Debug" platform="x86">
-					<Options>
-						<AllowUnsafe>true</AllowUnsafe>
-					</Options>
-				</Configuration>
-				<Configuration name="Release" platform="x86">
-					<Options>
-						<AllowUnsafe>true</AllowUnsafe>
-					</Options>
-				</Configuration>
-				
-				<Reference name="System"/>
-				<Reference name="System.Core"/>
-				<Reference name="System.Data" />	
-				
-				<Reference name="Airion.Common" localCopy="true" />		
-				
-				<Files>
-					<Match buildAction="Compile" pattern="*.cs" recurse="true"/>
-				</Files>
-			</Project>-->
+			</Project>			
 			
 			<Project name="Airion.Testing"
 			         path="Main/Airion.Testing"
@@ -310,61 +227,10 @@
 				<Reference name="System"/>
 				<Reference name="System.Core"/>
 				<Reference name="System.Data" />
-				
-				<Reference name="NUnit.Framework" path="../../Libraries/NUnit" localCopy="true" />
-				<Reference name="Gallio" path="../../Libraries/Gallio" localCopy="true" />
-				<Reference name="MBUnit" path="../../Libraries/MBUnit" localCopy="true" />
-				<Reference name="MBUnit40" path="../../Libraries/MBUnit" localCopy="true" />
-				<Reference name="Moq" path="../../Libraries/Moq" localCopy="true" />
-				
-				<Reference name="Airion.Common" localCopy="true" />
-				<Reference name="Airion.Persist" localCopy="true" />
-				<Reference name="Airion.Testing" localCopy="true" />
-				
-				<Files>
-					<Match buildAction="Compile" pattern="*.cs" recurse="true"/>
-				</Files>
-			</Project>
-			
-			<Project name="Airion.Persist.TransientProvider.Tests"
-			         path="./Tests/Airion.Persist.TransientProvider.Tests"
-			         language="C#"
-			         type="Library"
-			         frameworkVersion="v4_0">
-				<Reference name="System"/>
-				<Reference name="System.Core"/>
-				<Reference name="System.Data" />
-				
-				<Reference name="Gallio" path="../../Libraries/Gallio" localCopy="true" />
-				<Reference name="MBUnit" path="../../Libraries/MBUnit" localCopy="true" />
-				<Reference name="MBUnit40" path="../../Libraries/MBUnit" localCopy="true" />
-				<Reference name="Moq" path="../../Libraries/Moq" localCopy="true" />
-				
-				<Reference name="NUnit.Framework" path="../../Libraries/NUnit" localCopy="true" />
-				<Reference name="Airion.Common" localCopy="true" />
-				<Reference name="Airion.Persist" localCopy="true" />
-				<Reference name="Airion.Persist.TransientProvider" localCopy="true" />
-				<Reference name="Airion.Testing" localCopy="true" />		
-				
-				<Reference name="Airion.Persist.Tests" localCopy="true" />
-				
-				<Files>
-					<Match buildAction="Compile" pattern="*.cs" recurse="true"/>
-				</Files>
-			</Project>
-			
-			<Project name="Airion.Persist.NHibernateProvider.Tests"
-			         path="./Tests/Airion.Persist.NHibernateProvider.Tests"
-			         language="C#"
-			         type="Library"
-			         frameworkVersion="v4_0">
-				<Reference name="System"/>
-				<Reference name="System.Core"/>
-				<Reference name="System.Data" />
 								
 				<Reference name="FluentNHibernate" path="../../Libraries/FluentNHibernate" localCopy="true" />
 				<Reference name="NHibernate" path="../../Libraries/FluentNHibernate" localCopy="true" />
-				<Reference name="NHibernate.Linq" path="../../Libraries/FluentNHibernate" localCopy="true" />
+				<!--<Reference name="Remotion.Data.Linq.dll" path="../../Libraries/FluentNHibernate" localCopy="true" />-->
 				<Reference name="NHibernate.ByteCode.Castle" path="../../Libraries/FluentNHibernate" localCopy="true" />
 				<Reference name="System.Data.SQLite" path="../../Libraries/SQLite" localCopy="true" />
 				
@@ -376,19 +242,12 @@
 				
 				<Reference name="Airion.Common" localCopy="true" />
 				<Reference name="Airion.Persist" localCopy="true" />
-				<Reference name="Airion.Persist.NHibernateProvider" localCopy="true" />
 				<Reference name="Airion.Testing" localCopy="true" />
 				
-				
-				<Reference name="Airion.Persist.Tests" localCopy="true" />
-				
 				<Files>
-					<File buildAction="None">app.config</File>
 					<Match buildAction="Compile" pattern="*.cs" recurse="true"/>
 				</Files>
-			</Project>
-			
-			
+			</Project>			
 			
 			<Project name="Airion.Persist.CQRS.Tests"
 			         path="Tests/Airion.Persist.CQRS.Tests"
@@ -410,10 +269,15 @@
 				<Reference name="System"/>
 				<Reference name="System.Core"/>
 				<Reference name="System.Data" />		
+								
+				<Reference name="FluentNHibernate" path="../../Libraries/FluentNHibernate" localCopy="true" />
+				<Reference name="NHibernate" path="../../Libraries/FluentNHibernate" localCopy="true" />
+				<!--<Reference name="Remotion.Data.Linq.dll" path="../../Libraries/FluentNHibernate" localCopy="true" />-->
+				<Reference name="NHibernate.ByteCode.Castle" path="../../Libraries/FluentNHibernate" localCopy="true" />
+				<Reference name="System.Data.SQLite" path="../../Libraries/SQLite" localCopy="true" />
 				
 				<Reference name="Airion.Common" localCopy="true" />					
-				<Reference name="Airion.Persist" localCopy="true" />				
-				<Reference name="Airion.Persist.TransientProvider" localCopy="true" />						
+				<Reference name="Airion.Persist" localCopy="true" />									
 				<Reference name="Airion.Persist.CQRS" localCopy="true" />
 				<Reference name="Airion.Testing" localCopy="true" />	
 				
@@ -423,31 +287,7 @@
 				<Files>
 					<Match buildAction="Compile" pattern="*.cs" recurse="true"/>
 				</Files>
-			</Project>
-			
-			<!--<Project name="Airion.MVC.Tests"
-			         path="./Tests/Airion.MVC.Tests"
-			         language="C#"
-			         type="Library"
-			         frameworkVersion="v4_0">
-				<Reference name="System"/>
-				<Reference name="System.Core"/>
-				<Reference name="System.Data" />
-				
-				<Reference name="NUnit.Framework" path="../../Libraries/NUnit" localCopy="true" />
-				<Reference name="Gallio" path="../../Libraries/Gallio" localCopy="true" />
-				<Reference name="MBUnit" path="../../Libraries/MBUnit" localCopy="true" />
-				<Reference name="MBUnit40" path="../../Libraries/MBUnit" localCopy="true" />
-				<Reference name="Moq" path="../../Libraries/Moq" localCopy="true" />
-				
-				<Reference name="Airion.Common" localCopy="true" />
-				<Reference name="Airion.MVC" localCopy="true" />
-				<Reference name="Airion.Testing" localCopy="true" />
-				
-				<Files>
-					<Match buildAction="Compile" pattern="*.cs" recurse="true"/>
-				</Files>
-			</Project>-->
+			</Project>			
 						
 			<Project name="Airion.TestRunner"
 			         path="./Tests/Airion.TestRunner"
@@ -468,22 +308,18 @@
 											
 				<Reference name="FluentNHibernate" path="../../Libraries/FluentNHibernate" localCopy="true" />
 				<Reference name="NHibernate" path="../../Libraries/FluentNHibernate" localCopy="true" />
-				<Reference name="NHibernate.Linq" path="../../Libraries/FluentNHibernate" localCopy="true" />
+				<!--<Reference name="Remotion.Data.Linq.dll" path="../../Libraries/FluentNHibernate" localCopy="true" />-->
 				<Reference name="NHibernate.ByteCode.Castle" path="../../Libraries/FluentNHibernate" localCopy="true" />
 				<Reference name="System.Data.SQLite" path="../../Libraries/SQLite" localCopy="true" />
 								
 				<Reference name="Airion.Common" localCopy="true"/>
-				<Reference name="Airion.Persist" localCopy="true"/>
-				<Reference name="Airion.Persist.TransientProvider" localCopy="true"/>
-				<Reference name="Airion.Persist.NHibernateProvider" localCopy="true"/>				
+				<Reference name="Airion.Persist" localCopy="true"/>			
 				<Reference name="Airion.Persist.CQRS" localCopy="true"/>
 				<!--<Reference name="Airion.MVC" localCopy="true"/>-->
 				<Reference name="Airion.Testing" localCopy="true"/>
 				
 				<Reference name="Airion.Common.Tests" localCopy="true"/>
-				<Reference name="Airion.Persist.Tests" localCopy="true"/>
-				<Reference name="Airion.Persist.TransientProvider.Tests" localCopy="true"/>
-				<Reference name="Airion.Persist.NHibernateProvider.Tests" localCopy="true"/>			
+				<Reference name="Airion.Persist.Tests" localCopy="true"/>			
 				<Reference name="Airion.Persist.CQRS.Tests" localCopy="true"/>
 				<!--<Reference name="Airion.MVC.Tests" localCopy="true"/>-->
 				
