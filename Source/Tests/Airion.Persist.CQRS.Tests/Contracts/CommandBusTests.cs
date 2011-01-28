@@ -5,7 +5,6 @@
 using System;
 using Airion.Parallels;
 using Airion.Persist;
-using Airion.Persist.CQRS.Tests.Support.Mappings;
 using Airion.Persist.Internal;
 using Airion.Persist.Provider;
 using Airion.Testing;
@@ -24,43 +23,48 @@ namespace Airion.Persist.CQRS.Tests.Contracts
 		{			
 			#region TestCommand
 			
-			private class TestCommand : ICommand
+			private class TestCommand 
 			{
-				public int ExecuteCount { get; private set; }
-				public bool IsValid { get; set; }
-				
 				public TestCommand()
 				{
-					ExecuteCount = 0;
 					IsValid = true;
 				}
-				
-				public void Execute(CommandContext commandContext)
+				public bool IsValid { get; set; }
+			}
+			
+			private class TestCommandHandler : AbstractCommandHandler<TestCommand>
+			{
+				public TestCommandHandler()
 				{
-					if(Verify(commandContext)) {					
-						ExecuteCount++;
+					ExecutionCount = 0;
+				}
+				
+				public int ExecutionCount { get; set; }
+			
+												
+				protected override void Verify(CommandContext<TestCommand> commandContext)
+				{					
+					var command = commandContext.Command;
+					if(!command.IsValid) {
+						commandContext.AddError("IsValid", "The command is not valid.");
 					}
 				}
 				
-				private bool Verify(CommandContext commandContext)
+				
+				protected override void HandleInternal(CommandContext<TestCommand> commandContext)
 				{
-					if(!IsValid) {
-						commandContext.AddError("Validation failed");
-					}
-					
-					return !commandContext.HasError;
-				}
+					ExecutionCount++;					
+				}				
 			}
 					
 			#endregion
 			
 			#region Data
 			
-			private Store _store;
 			private CommandBus _commandBus;
 			
 			// step data
-			private ITaskHandle _commandHandle;
+			private TestCommandHandler _commandHandler;
 			private TestCommand _command;
 			private Exception _commandExecutionException;
 			
@@ -71,42 +75,35 @@ namespace Airion.Persist.CQRS.Tests.Contracts
 			
 			protected override void BeforeScenario()
 			{
-				var configuration = new NHibernateConfiguration(provider => new TransientSessionAndTransactionManager(provider))
-					.Database(SQLiteConfiguration.Standard.InMemory())
-					.Mappings(x => x.FluentMappings
-					          .AddFromAssemblyOf<RecipeMap>());
-				_store = new Store(configuration);
-				_commandBus = new CommandBus(_store, appartmentState => new TaskWorker(appartmentState));
+				_commandHandler = new TestCommandHandler();
+				_commandBus = new CommandBus(new TestCommandHandler[] { _commandHandler });
 			}
 			
 			protected override void AfterScenario()
 			{
-				_commandBus.Dispose();
-				_store.Dispose();
 			}
 			
 			#endregion
 			
 			#region Commands
 			
-			public void ScheduleCommand()
-			{
-				_command = new TestCommand();
-				_commandHandle = _commandBus.Schedule(_command);
-			}
-			
-			public void ScheduleInvalidCommand()
-			{
-				_command = new TestCommand() { IsValid = false };
-				_commandHandle = _commandBus.Schedule(_command);				
-			}
-			
-			public void WaitForCommand()
+			public void ExecuteCommand()
 			{
 				try {
-					_commandHandle.Wait();
-				} catch(System.Reflection.TargetInvocationException e) {
-					_commandExecutionException = e.InnerException;
+					_command = new TestCommand();
+					_commandBus.Execute(_command);
+				} catch (Exception e) {
+					_commandExecutionException = e;
+				}
+			}
+			
+			public void ExecuteInvalidCommand()
+			{
+				try {
+					_command = new TestCommand() { IsValid = false };
+					_commandBus.Execute(_command);		
+				} catch (Exception e) {
+					_commandExecutionException = e;
 				}
 			}
 			
@@ -117,12 +114,12 @@ namespace Airion.Persist.CQRS.Tests.Contracts
 			
 			public void VerifyCommandWasExecuted()
 			{
-				Assert.That(_command.ExecuteCount, Is.EqualTo(1));
+				Assert.That(_commandHandler.ExecutionCount, Is.EqualTo(1));
 			}
 			
 			public void VerifyCommandWasNotExecuted()
 			{
-				Assert.That(_command.ExecuteCount, Is.EqualTo(0));
+				Assert.That(_commandHandler.ExecutionCount, Is.EqualTo(0));
 			}
 			
 			public void VerifyValidationExeceptionWasThrown()
@@ -141,8 +138,7 @@ namespace Airion.Persist.CQRS.Tests.Contracts
 		public void ScheduleCommand_VerificationPasses_CommandIsExecuted()
 		{
 			using(var steps = new Steps()) {
-				steps.ScheduleCommand();
-				steps.WaitForCommand();
+				steps.ExecuteCommand();
 				steps.VerifyCommandWasExecuted();
 			}
 		}
@@ -151,8 +147,7 @@ namespace Airion.Persist.CQRS.Tests.Contracts
 		public void ScheduleCommand_VerificationFails_CommandIsNotExecuted()
 		{
 			using(var steps = new Steps()) {
-				steps.ScheduleInvalidCommand();
-				steps.WaitForCommand();
+				steps.ExecuteInvalidCommand();
 				steps.VerifyCommandWasNotExecuted();
 				steps.VerifyValidationExeceptionWasThrown();
 			}

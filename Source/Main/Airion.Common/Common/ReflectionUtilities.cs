@@ -14,6 +14,23 @@ namespace Airion.Common
 	/// </summary>
 	public static class ReflectionUtilities
 	{
+		public static Type GetGenericInterface(this Type type, Type genericInterfaceTypeDefintion)
+		{
+			Guard.RequireNotNull("genericInterfaceTypeDefintion", genericInterfaceTypeDefintion);
+			Guard.Require("genericInterfaceTypeDefintion", genericInterfaceTypeDefintion.IsInterface && genericInterfaceTypeDefintion.IsGenericTypeDefinition,
+			              "The genericInterfaceTypeDefinition must a generic type definition of an interface.");
+			
+			return type.GetInterfaces()
+				.FirstOrDefault(
+					interfaceType => {
+						if(interfaceType.IsGenericType) {
+							var interfaceTypeGenericTypeDef = interfaceType.GetGenericTypeDefinition();
+							return interfaceTypeGenericTypeDef == genericInterfaceTypeDefintion;
+						}
+						return false;
+					});
+		}
+		
 		public static bool ImplementsInterface<T>(this Type type)
 		{
 			Type interfaceType = typeof(T);

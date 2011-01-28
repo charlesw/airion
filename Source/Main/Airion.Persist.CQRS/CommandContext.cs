@@ -7,17 +7,21 @@ using System.Collections.Generic;
 
 namespace Airion.Persist.CQRS
 {
-	public class CommandContext
+	public class CommandContext<TCommand>
 	{
 		private List<CommandError> _errors;
+		private TCommand _command;
 		
-		public CommandContext(IConversation conversation)
+		public CommandContext(TCommand command)
 		{
 			_errors = new List<CommandError>();
-			Conversation = conversation;
-		}
+			_command = command;
+		}		
 		
-		public IConversation Conversation { get; private set; }
+		public TCommand Command
+		{
+			get { return _command; }
+		}
 		
 		public IEnumerable<CommandError> Errors { 
 			get { return _errors; }

@@ -5,7 +5,6 @@
 using System;
 using System.Linq;
 using Airion.Persist;
-using Airion.Persist.CQRS.Tests.Support.Mappings;
 using Airion.Persist.Internal;
 using Airion.Persist.Provider;
 using Airion.Testing;
@@ -21,11 +20,23 @@ namespace Airion.Persist.CQRS.Tests.Contracts
 		
 		public class Steps : AbstractSteps 
 		{
+			#region TestCommand
+			
+			private class TestCommand 
+			{
+				public TestCommand()
+				{
+					IsValid = true;
+				}
+				public bool IsValid { get; set; }
+			}
+			
+			#endregion
+			
 			#region Data
 			
-			private Store _store;
-			private IConversation _conversation;
-			private CommandContext _context;
+			private TestCommand _command;
+			private CommandContext<TestCommand> _context;
 			
 			#endregion
 			
@@ -33,19 +44,12 @@ namespace Airion.Persist.CQRS.Tests.Contracts
 			
 			protected override void BeforeScenario()
 			{
-				var configuration = new NHibernateConfiguration(provider => new TransientSessionAndTransactionManager(provider))
-					.Database(SQLiteConfiguration.Standard.InMemory())
-					.Mappings(x => x.FluentMappings
-					          .AddFromAssemblyOf<RecipeMap>());
-				_store = new Store(configuration);
-				_conversation = _store.BeginConversation();
-				_context = new CommandContext(_conversation);
+				_command = new TestCommand();
+				_context = new CommandContext<TestCommand>(_command);
 			}
 			
 			protected override void AfterScenario()
 			{
-				_conversation.Dispose();
-				_store.Dispose();
 			}
 			
 			#endregion

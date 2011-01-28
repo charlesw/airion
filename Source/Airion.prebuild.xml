@@ -64,6 +64,7 @@
 				
 				<Files>
 					<Match buildAction="Compile" pattern="*.cs" recurse="true"/>
+					<Match buildAction="None" pattern="*.config" recurse="false"/>
 				</Files>
 			</Project>
 						
@@ -100,6 +101,7 @@
 				
 				<Files>
 					<Match buildAction="Compile" pattern="*.cs" recurse="true"/>
+					<Match buildAction="None" pattern="*.config" recurse="false"/>
 				</Files>
 			</Project>
 			
@@ -135,6 +137,7 @@
 				
 				<Files>
 					<Match buildAction="Compile" pattern="*.cs" recurse="true"/>
+					<Match buildAction="None" pattern="*.config" recurse="false"/>
 				</Files>
 			</Project>			
 			
@@ -166,6 +169,7 @@
 				
 				<Files>
 					<Match buildAction="Compile" pattern="*.cs" recurse="true"/>
+					<Match buildAction="None" pattern="*.config" recurse="false"/>
 				</Files>
 			</Project>
 			
@@ -216,6 +220,7 @@
 				
 				<Files>
 					<Match buildAction="Compile" pattern="*.cs" recurse="true"/>
+					<Match buildAction="None" pattern="*.config" recurse="false"/>
 				</Files>
 			</Project>
 			
@@ -246,6 +251,7 @@
 				
 				<Files>
 					<Match buildAction="Compile" pattern="*.cs" recurse="true"/>
+					<Match buildAction="None" pattern="*.config" recurse="false"/>
 				</Files>
 			</Project>			
 			
@@ -286,6 +292,7 @@
 				
 				<Files>
 					<Match buildAction="Compile" pattern="*.cs" recurse="true"/>
+					<Match buildAction="None" pattern="*.config" recurse="false"/>
 				</Files>
 			</Project>			
 						
@@ -324,8 +331,8 @@
 				<!--<Reference name="Airion.MVC.Tests" localCopy="true"/>-->
 				
 				<Files>
-					<File buildAction="None">app.config</File>
 					<Match buildAction="Compile" pattern="*.cs" recurse="true"/>
+					<Match buildAction="None" pattern="*.config" recurse="false"/>
 				</Files>
 			</Project>
 		</EmbeddedSolution>

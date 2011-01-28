@@ -20,40 +20,5 @@ namespace Airion.Common
 			return entity;
 		}
 		
-		#region Equals and GetHashCode implementation
-		
-		public override bool Equals(object obj)
-		{
-			if(obj == null || obj.GetType() != GetType()) {
-				return false;
-			} else if(Object.ReferenceEquals(this, obj)) {
-				return true;
-			}
-			
-			var other = (Entity<TId>)obj;				
-			return Object.Equals(Id, other.Id) && !Object.Equals(Id, default(TId));
-		}
-		
-		public override int GetHashCode()
-		{
-			const int HashMultiplier = 37;
-			return (GetType().GetHashCode() * HashMultiplier) ^ Id.GetHashCode();
-		}
-		
-		public static bool operator ==(Entity<TId> lhs, Entity<TId> rhs)
-		{
-			if (ReferenceEquals(lhs, rhs))
-				return true;
-			if (ReferenceEquals(lhs, null) || ReferenceEquals(rhs, null))
-				return false;
-			return lhs.Equals(rhs);
-		}
-		
-		public static bool operator !=(Entity<TId> lhs, Entity<TId> rhs)
-		{
-			return !(lhs == rhs);
-		}
-		#endregion
-		
 	}
 }

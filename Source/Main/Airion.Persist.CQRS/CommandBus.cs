@@ -2,77 +2,45 @@
 // This code is distributed under the GNU LGPL (for details please see ~\Documentation\license.txt)
 
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using Airion.Common;
 using Airion.Parallels;
 
 namespace Airion.Persist.CQRS
 {
-	public class CommandBus : LightDisposableBase
-	{
-		private ITaskWorker _taskWorker;
-		private Store _store;
+	public class CommandBus
+	{		
+		private Dictionary<Type, List<ICommandHandler>> _commandHandlers;
 		
-		private class CommandHandler : IWorkItem, IWorkItemCallback
+		public CommandBus(IEnumerable<ICommandHandler> commandHandlers)
 		{
-			private Store _store;
-			private ICommand _command;
-			private Exception _commandExecutionException;
-			
-			public CommandHandler(Store store, ICommand command)
-			{
-				_store = store;
-				_command = command;
-			}
-			
-			public void Execute()
-			{
-				try {
-					using(var conversation = _store.BeginConversation()) {
-						var context = new CommandContext(conversation);
-						_command.Execute(context);
-						if(context.HasError) {
-							throw new CommandValidationException(context.Errors);
-						}
-					}
-				} catch (OperationCanceledException) {
-					throw;
-				} catch (Exception e) {
-					// just record all other exceptions
-					_commandExecutionException = e;
+			_commandHandlers = new Dictionary<Type, List<ICommandHandler>>();
+			foreach(var commandHandler in commandHandlers) {
+				var commandHandlerType = commandHandler.GetType();
+				var commandType = commandHandlerType.GetGenericInterface(typeof(ICommandHandler<>)).GetGenericArguments()[0];
+				List<ICommandHandler> commandHandlersForCommandType;
+				if(!_commandHandlers.TryGetValue(commandType, out commandHandlersForCommandType)) {
+					commandHandlersForCommandType = new List<ICommandHandler>();
+					_commandHandlers.Add(commandType, commandHandlersForCommandType);
 				}
+				commandHandlersForCommandType.Add(commandHandler);
+			}
+		}
+		
+		public void Execute<TCommand>(TCommand command)
+		{
+			var commandType = typeof(TCommand);
+			List<ICommandHandler> commandHandlersForCommandType;
+			if(!_commandHandlers.TryGetValue(commandType, out commandHandlersForCommandType)) {
+				throw new InvalidOperationException(String.Format("No command handlers have been registered for the command type {0}.", commandType.Name));
 			}
 			
-			public void NotifyCallback()
-			{
-				if(_commandExecutionException != null) {
-					throw new System.Reflection.TargetInvocationException(_commandExecutionException);
-				}
+			var commandContext = new CommandContext<TCommand>(command);
+			foreach(var commandHandler in commandHandlersForCommandType.Cast<ICommandHandler<TCommand>>()) {
+				commandHandler.Handle(commandContext);
 			}
-		}
-		
-		public CommandBus(Store store, TaskWorkerFactory taskWorkerFactory)
-		{
-			_store = store;
-			_taskWorker = taskWorkerFactory(ApartmentState.MTA);
-			_taskWorker.Start();
-		}
-		
-		public ITaskHandle Schedule(ICommand command)
-		{
-			var commandHandler = new CommandHandler(_store, command);
-			return _taskWorker.ExecuteWorkItem(commandHandler);
-		}
-		
-		protected override void Dispose(bool disposing)
-		{
-			if(disposing) {
-				if(_taskWorker != null) {
-					_taskWorker.Dispose();
-					_taskWorker = null;
-				}
-			}
-			base.Dispose(disposing);
-		}
+		}		
 	}
 }
