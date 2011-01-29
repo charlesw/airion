@@ -12,35 +12,32 @@ namespace Airion.Persist.CQRS
 {
 	public class CommandBus
 	{		
-		private Dictionary<Type, List<ICommandHandler>> _commandHandlers;
+		private Dictionary<Type, ICommandHandler> _commandHandlers;
 		
 		public CommandBus(IEnumerable<ICommandHandler> commandHandlers)
 		{
-			_commandHandlers = new Dictionary<Type, List<ICommandHandler>>();
+			_commandHandlers = new Dictionary<Type, ICommandHandler>();
 			foreach(var commandHandler in commandHandlers) {
 				var commandHandlerType = commandHandler.GetType();
 				var commandType = commandHandlerType.GetGenericInterface(typeof(ICommandHandler<>)).GetGenericArguments()[0];
-				List<ICommandHandler> commandHandlersForCommandType;
-				if(!_commandHandlers.TryGetValue(commandType, out commandHandlersForCommandType)) {
-					commandHandlersForCommandType = new List<ICommandHandler>();
-					_commandHandlers.Add(commandType, commandHandlersForCommandType);
+				if(_commandHandlers.ContainsKey(commandType)) {
+					throw new ArgumentException("Cannot register more than one command handler for the same command type.", "commandHandlers");
 				}
-				commandHandlersForCommandType.Add(commandHandler);
+				
+				_commandHandlers.Add(commandType, commandHandler);
 			}
 		}
 		
 		public void Execute<TCommand>(TCommand command)
 		{
 			var commandType = typeof(TCommand);
-			List<ICommandHandler> commandHandlersForCommandType;
-			if(!_commandHandlers.TryGetValue(commandType, out commandHandlersForCommandType)) {
-				throw new InvalidOperationException(String.Format("No command handlers have been registered for the command type {0}.", commandType.Name));
+			ICommandHandler commandHandler;
+			if(!_commandHandlers.TryGetValue(commandType, out commandHandler)) {
+				throw new InvalidOperationException(String.Format("No command handler has been registered for the command type {0}.", commandType.Name));
 			}
-			
+			var typedCommandHandler = (ICommandHandler<TCommand>)commandHandler;
 			var commandContext = new CommandContext<TCommand>(command);
-			foreach(var commandHandler in commandHandlersForCommandType.Cast<ICommandHandler<TCommand>>()) {
-				commandHandler.Handle(commandContext);
-			}
+			typedCommandHandler.Handle(commandContext);
 		}		
 	}
 }

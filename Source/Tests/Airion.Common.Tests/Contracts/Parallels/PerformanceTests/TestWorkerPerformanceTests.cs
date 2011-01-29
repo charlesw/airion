@@ -17,7 +17,7 @@ using NUnit.Framework;
 
 namespace Airion.Common.Tests.Contracts.Parallels.PerformanceTests
 {
-	[TestFixture]
+	[TestFixture, Ignore]
 	public class TestWorkerPerformanceTests : ParallelsAutofacTestBase
 	{
 		/// <summary>

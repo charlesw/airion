@@ -10,6 +10,7 @@ using Airion.Persist.Provider;
 using Airion.Testing;
 using FluentNHibernate.Cfg.Db;
 using NUnit.Framework;
+using Airion.Persist.CQRS.Tests.Support;
 
 namespace Airion.Persist.CQRS.Tests.Contracts
 {
@@ -20,19 +21,6 @@ namespace Airion.Persist.CQRS.Tests.Contracts
 		
 		public class Steps : AbstractSteps 
 		{
-			#region TestCommand
-			
-			private class TestCommand 
-			{
-				public TestCommand()
-				{
-					IsValid = true;
-				}
-				public bool IsValid { get; set; }
-			}
-			
-			#endregion
-			
 			#region Data
 			
 			private TestCommand _command;

@@ -11,6 +11,7 @@ using Airion.Testing;
 using FluentNHibernate.Cfg.Db;
 using Moq;
 using NUnit.Framework;
+using Airion.Persist.CQRS.Tests.Support;
 
 namespace Airion.Persist.CQRS.Tests.Contracts
 {
@@ -20,44 +21,7 @@ namespace Airion.Persist.CQRS.Tests.Contracts
 		#region Steps
 		
 		public class Steps : AbstractSteps
-		{			
-			#region TestCommand
-			
-			private class TestCommand 
-			{
-				public TestCommand()
-				{
-					IsValid = true;
-				}
-				public bool IsValid { get; set; }
-			}
-			
-			private class TestCommandHandler : AbstractCommandHandler<TestCommand>
-			{
-				public TestCommandHandler()
-				{
-					ExecutionCount = 0;
-				}
-				
-				public int ExecutionCount { get; set; }
-			
-												
-				protected override void Verify(CommandContext<TestCommand> commandContext)
-				{					
-					var command = commandContext.Command;
-					if(!command.IsValid) {
-						commandContext.AddError("IsValid", "The command is not valid.");
-					}
-				}
-				
-				
-				protected override void HandleInternal(CommandContext<TestCommand> commandContext)
-				{
-					ExecutionCount++;					
-				}				
-			}
-					
-			#endregion
+		{	
 			
 			#region Data
 			
@@ -135,7 +99,7 @@ namespace Airion.Persist.CQRS.Tests.Contracts
 		#region Tests
 		
 		[Test]
-		public void ScheduleCommand_VerificationPasses_CommandIsExecuted()
+		public void ExecuteCommand_VerificationPasses_CommandIsExecuted()
 		{
 			using(var steps = new Steps()) {
 				steps.ExecuteCommand();
@@ -144,13 +108,25 @@ namespace Airion.Persist.CQRS.Tests.Contracts
 		}
 		
 		[Test]
-		public void ScheduleCommand_VerificationFails_CommandIsNotExecuted()
+		public void ExecuteCommand_VerificationFails_CommandIsNotExecuted()
 		{
 			using(var steps = new Steps()) {
 				steps.ExecuteInvalidCommand();
 				steps.VerifyCommandWasNotExecuted();
 				steps.VerifyValidationExeceptionWasThrown();
 			}
+		}
+		
+		[Test]
+		public void Construct_MultipleCommandHandlersForSameCommand_ThrowArgumentException()
+		{
+			// The command bus doesn't currently support multiple command handlers for the same command, make sure that it fails.
+			var commandHandlers = new ICommandHandler[] {
+				new TestCommandHandler(), 
+				new TestCommandHandler()
+			};
+			
+			Assert.Throws<ArgumentException>(() => new CommandBus(commandHandlers));
 		}
 		
 		#endregion
