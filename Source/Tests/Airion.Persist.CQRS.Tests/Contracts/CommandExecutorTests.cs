@@ -16,7 +16,7 @@ using Airion.Persist.CQRS.Tests.Support;
 namespace Airion.Persist.CQRS.Tests.Contracts
 {
 	[TestFixture]
-	public class CommandBusTests
+	public class CommandExecutorTests
 	{
 		#region Steps
 		
@@ -25,7 +25,7 @@ namespace Airion.Persist.CQRS.Tests.Contracts
 			
 			#region Data
 			
-			private CommandBus _commandBus;
+			private CommandExecutor _commandBus;
 			
 			// step data
 			private TestCommandHandler _commandHandler;
@@ -40,7 +40,7 @@ namespace Airion.Persist.CQRS.Tests.Contracts
 			protected override void BeforeScenario()
 			{
 				_commandHandler = new TestCommandHandler();
-				_commandBus = new CommandBus(new TestCommandHandler[] { _commandHandler });
+				_commandBus = new CommandExecutor(new TestCommandHandler[] { _commandHandler });
 			}
 			
 			protected override void AfterScenario()
@@ -126,7 +126,7 @@ namespace Airion.Persist.CQRS.Tests.Contracts
 				new TestCommandHandler()
 			};
 			
-			Assert.Throws<ArgumentException>(() => new CommandBus(commandHandlers));
+			Assert.Throws<ArgumentException>(() => new CommandExecutor(commandHandlers));
 		}
 		
 		#endregion

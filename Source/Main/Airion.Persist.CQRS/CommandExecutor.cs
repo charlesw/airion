@@ -10,11 +10,11 @@ using Airion.Parallels;
 
 namespace Airion.Persist.CQRS
 {
-	public class CommandBus
+	public class CommandExecutor
 	{		
 		private Dictionary<Type, ICommandHandler> _commandHandlers;
 		
-		public CommandBus(IEnumerable<ICommandHandler> commandHandlers)
+		public CommandExecutor(IEnumerable<ICommandHandler> commandHandlers)
 		{
 			_commandHandlers = new Dictionary<Type, ICommandHandler>();
 			foreach(var commandHandler in commandHandlers) {
