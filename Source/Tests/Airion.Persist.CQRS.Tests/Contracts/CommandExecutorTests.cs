@@ -29,6 +29,7 @@ namespace Airion.Persist.CQRS.Tests.Contracts
 			
 			// step data
 			private TestCommandHandler _commandHandler;
+			private TestChildCommandHandler _childCommandHandler;
 			private TestCommand _command;
 			private Exception _commandExecutionException;
 			
@@ -40,7 +41,8 @@ namespace Airion.Persist.CQRS.Tests.Contracts
 			protected override void BeforeScenario()
 			{
 				_commandHandler = new TestCommandHandler();
-				_commandBus = new CommandExecutor(new TestCommandHandler[] { _commandHandler });
+				_childCommandHandler = new TestChildCommandHandler();
+				_commandBus = new CommandExecutor(new ICommandHandler[] { _commandHandler, _childCommandHandler });
 			}
 			
 			protected override void AfterScenario()
@@ -55,6 +57,16 @@ namespace Airion.Persist.CQRS.Tests.Contracts
 			{
 				try {
 					_command = new TestCommand();
+					_commandBus.Execute(_command);
+				} catch (Exception e) {
+					_commandExecutionException = e;
+				}
+			}
+			
+			public void ExecuteChildCommand()
+			{
+				try {
+					_command = new TestChildCommand();
 					_commandBus.Execute(_command);
 				} catch (Exception e) {
 					_commandExecutionException = e;
@@ -81,9 +93,19 @@ namespace Airion.Persist.CQRS.Tests.Contracts
 				Assert.That(_commandHandler.ExecutionCount, Is.EqualTo(1));
 			}
 			
+			public void VerifyChildCommandWasExecuted()
+			{
+				Assert.That(_childCommandHandler.ExecutionCount, Is.EqualTo(1));
+			}
+			
 			public void VerifyCommandWasNotExecuted()
 			{
 				Assert.That(_commandHandler.ExecutionCount, Is.EqualTo(0));
+			}
+			
+			public void VerifyChildCommandWasNotExecuted()
+			{
+				Assert.That(_childCommandHandler.ExecutionCount, Is.EqualTo(0));
 			}
 			
 			public void VerifyValidationExeceptionWasThrown()
@@ -114,6 +136,15 @@ namespace Airion.Persist.CQRS.Tests.Contracts
 				steps.ExecuteInvalidCommand();
 				steps.VerifyCommandWasNotExecuted();
 				steps.VerifyValidationExeceptionWasThrown();
+			}
+		}
+		
+		[Test]
+		public void ExecuteCommand_CommandIsSubclass_CommandHandlerForSubclassIsExecuted()
+		{
+			using(var steps = new Steps()) {
+				steps.ExecuteChildCommand();
+				steps.VerifyChildCommandWasExecuted();
 			}
 		}
 		
