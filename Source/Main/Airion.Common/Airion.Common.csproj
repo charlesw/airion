@@ -1,0 +1,270 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <PropertyGroup>
+    <ProjectType>Local</ProjectType>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{AE263B2D-0000-0000-0000-000000000000}</ProjectGuid>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <ApplicationIcon>
+    </ApplicationIcon>
+    <AssemblyKeyContainerName>
+    </AssemblyKeyContainerName>
+    <AssemblyName>Airion.Common</AssemblyName>
+    <DefaultClientScript>JScript</DefaultClientScript>
+    <DefaultHTMLPageLayout>Grid</DefaultHTMLPageLayout>
+    <DefaultTargetSchema>IE50</DefaultTargetSchema>
+    <DelaySign>false</DelaySign>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>
+    </AppDesignerFolder>
+    <RootNamespace>Airion</RootNamespace>
+    <StartupObject>
+    </StartupObject>
+    <StartArguments>
+    </StartArguments>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
+    <BaseAddress>285212672</BaseAddress>
+    <CheckForOverflowUnderflow>False</CheckForOverflowUnderflow>
+    <ConfigurationOverrideFile>
+    </ConfigurationOverrideFile>
+    <DefineConstants>DEBUG;TRACE;</DefineConstants>
+    <DocumentationFile>
+    </DocumentationFile>
+    <DebugSymbols>True</DebugSymbols>
+    <FileAlignment>4096</FileAlignment>
+    <Optimize>False</Optimize>
+    <OutputPath>..\..\..\Binaries\Debug\</OutputPath>
+    <RegisterForComInterop>False</RegisterForComInterop>
+    <RemoveIntegerChecks>False</RemoveIntegerChecks>
+    <TreatWarningsAsErrors>False</TreatWarningsAsErrors>
+    <WarningLevel>4</WarningLevel>
+    <NoStdLib>False</NoStdLib>
+    <NoWarn>
+    </NoWarn>
+    <PlatformTarget>x86</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
+    <BaseAddress>285212672</BaseAddress>
+    <CheckForOverflowUnderflow>False</CheckForOverflowUnderflow>
+    <ConfigurationOverrideFile>
+    </ConfigurationOverrideFile>
+    <DefineConstants>TRACE;</DefineConstants>
+    <DocumentationFile>
+    </DocumentationFile>
+    <DebugSymbols>False</DebugSymbols>
+    <FileAlignment>4096</FileAlignment>
+    <Optimize>True</Optimize>
+    <OutputPath>..\..\..\Binaries\Release\</OutputPath>
+    <RegisterForComInterop>False</RegisterForComInterop>
+    <RemoveIntegerChecks>False</RemoveIntegerChecks>
+    <TreatWarningsAsErrors>False</TreatWarningsAsErrors>
+    <WarningLevel>4</WarningLevel>
+    <NoStdLib>False</NoStdLib>
+    <NoWarn>
+    </NoWarn>
+    <PlatformTarget>x86</PlatformTarget>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System">
+      <Name>System</Name>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Core">
+      <Name>System.Core</Name>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Data">
+      <Name>System.Data</Name>
+      <Private>False</Private>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Common\ArrayUtilities.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Common\CallLocalValueStore.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Common\Cloneable.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Common\DisposableBase.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Common\Entity.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Common\FreezableBase.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Common\Guard.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Common\IFreezable.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Common\INotifyDisposed.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Common\INotifyDisposing.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Common\INotifyPropertyChanging.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Common\IValueStore.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Common\LightDisposableBase.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Common\PropertyChangingEventArgs.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Common\ReflectionUtilities.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Common\ValueChangedEventArgs.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Common\Collections\ArrayListBase.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Common\Collections\CollectionBase.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Common\Collections\CollectionGuard.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Common\Collections\CollectionView.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Common\Collections\DictionaryBase.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Common\Collections\EnumerableBase.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Common\Collections\EventList.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Common\Collections\IMap.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Common\Collections\ImposterList.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Common\Collections\ListBase.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Common\Collections\ListCollectionWrapper.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Common\Collections\ListCollectionWrapperBase.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Common\Collections\Map.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Common\Collections\MapView.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Common\Collections\MultiSet.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Common\Collections\QueuedSet.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Common\Collections\ReadonlyCollection.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Common\Collections\TypeMapping.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Parallels\AsyncMediator.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Parallels\IMediator.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Parallels\ITaskHandle.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Parallels\ITaskWorker.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Parallels\IWorkItem.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Parallels\IWorkItemCallback.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Parallels\Mediator.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Parallels\TaskHandle.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Parallels\TaskWorker.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Parallels\Extensions\PendingScheduledWorkExtensions.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Parallels\Internal\BackgroundWorker.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Parallels\Internal\BaseScheduledTask.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Parallels\Internal\EventGroup.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Parallels\Internal\IBackgroundWorker.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Parallels\Internal\IPendingWorkCollection.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Parallels\Internal\IScheduledTask.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Parallels\Internal\MultiBackgroundWorker.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Parallels\Internal\PendingWorkQueue.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Parallels\Internal\PlatformConstants.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Parallels\Internal\ScheduledActionTask.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Parallels\Internal\ScheduledFunctionTask.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Parallels\Internal\ScheduledWorkItemTask.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSHARP.Targets" />
+  <PropertyGroup>
+    <PreBuildEvent>
+    </PreBuildEvent>
+    <PostBuildEvent>
+    </PostBuildEvent>
+  </PropertyGroup>
+</Project>

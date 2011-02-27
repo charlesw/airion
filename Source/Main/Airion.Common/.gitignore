@@ -2,5 +2,4 @@ bin/**/*
 bin/*
 obj/**/*
 obj/*
-*.csproj
 *.csproj.user

@@ -8,7 +8,6 @@ using Airion.Persist;
 using Airion.Persist.Internal;
 using Airion.Persist.Provider;
 using Airion.Testing;
-using FluentNHibernate.Cfg.Db;
 using NUnit.Framework;
 using Airion.Persist.CQRS.Tests.Support;
 

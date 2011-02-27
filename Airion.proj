@@ -11,12 +11,12 @@
 		<TestBinOutputDirectory>$(MSBuildProjectDirectory)\Test Binaries</TestBinOutputDirectory>
 		<TestResultsDirectory>$(MSBuildProjectDirectory)\Test Results</TestResultsDirectory>
 		
-		<PrebuildProgram>"$(MSBuildProjectDirectory)\Tools\Prebuild.exe"</PrebuildProgram>
+<!--		<PrebuildProgram>"$(MSBuildProjectDirectory)\Tools\Prebuild.exe"</PrebuildProgram>-->
 		<!-- Common Properties -->
 	</PropertyGroup>
 	<ItemGroup>
 		<!-- Collections -->
-		<PrebuildFile Include="$(SourceDirectory)\Airion.Prebuild.xml" />
+<!--		<PrebuildFile Include="$(SourceDirectory)\Airion.Prebuild.xml" />-->
 		
 		<ProjectDirectories Include="$(SourceDirectory)\Main\Airion.Common\" />
 		<ProjectDirectories Include="$(SourceDirectory)\Main\Airion.Persist\" />
@@ -33,10 +33,12 @@
 		<ProjectDirectories Include="$(SourceDirectory)\Tests\Airion.Persist.CQRS.Tests\" />
 		<ProjectDirectories Include="$(SourceDirectory)\Tests\Airion.MVC.Tests\" />
 		<ProjectDirectories Include="$(SourceDirectory)\Tests\Airion.Testing.Tests\" />
+		
+		<Solution Include="$(SourceDirectory)\Airion.sln" />
 	</ItemGroup>
 	<Target Name="Clean">
 		<!-- Clean Tasks -->
-		<Exec Command="$(PrebuildProgram) /clean vs2010 /file &quot;@(PrebuildFile)&quot; /yes" WorkingDirectory="$(SourceDirectory)" />
+<!--		<Exec Command="$(PrebuildProgram) /clean vs2010 /file &quot;@(PrebuildFile)&quot; /yes" WorkingDirectory="$(SourceDirectory)" />-->
 		
 		<Message Text="Removing project obj and bin directories" />
 		<RemoveDir Directories="@(ProjectDirectories->'%(rootdir)%(directory)bin')" />
@@ -45,13 +47,13 @@
 		<RemoveDir Directories="$(TestBinOutputDirectory)" />
 		<RemoveDir Directories="$(TestResultsDirectory)" />
 	</Target>
-	<Target Name="Prebuild" DependsOnTargets="Clean">
+	<!--<Target Name="Prebuild" DependsOnTargets="Clean">
 		<Exec Command="$(PrebuildProgram) /target vs2010 /file &quot;@(PrebuildFile)&quot; /yes" WorkingDirectory="$(SourceDirectory)" />
 		<CreateItem Include="$(SourceDirectory)\Airion.sln;">
 			<Output ItemName="Solution" TaskParameter="Include"/>
 		</CreateItem>
-	</Target>
-	<Target Name="Build" DependsOnTargets="Prebuild">
+	</Target>-->
+	<Target Name="Build" DependsOnTargets="Clean">
 		<!-- Build Tasks -->
 		<MSBuild Projects="@(Solution)" Targets="Build"  Properties="Configuration=$(Configuration)"/>
 		
