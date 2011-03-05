@@ -8,3 +8,4 @@ Test Binaries/**
 /Source/Libraries/FluentNHibernate/Iesi.Collections.pdb
 /Source/Libraries/FluentNHibernate/NHibernate.ByteCode.Castle.pdb
 /Source/Libraries/FluentNHibernate/NHibernate.pdb
+*.gallio.user

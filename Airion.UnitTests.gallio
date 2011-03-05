@@ -3,10 +3,8 @@
   <testPackage shadowCopy="false" debug="false">
     <files>
       <file>Test Binaries\Debug\Airion.Common.Tests.dll</file>
-      <file>Test Binaries\Debug\Airion.MVC.Tests.dll</file>
-      <file>Test Binaries\Debug\Airion.Persist.NHibernateProvider.Tests.dll</file>
+      <file>Test Binaries\Debug\Airion.Persist.CQRS.Tests.dll</file>
       <file>Test Binaries\Debug\Airion.Persist.Tests.dll</file>
-      <file>Test Binaries\Debug\Airion.Persist.TransientProvider.Tests.dll</file>
     </files>
     <hintDirectories />
     <excludedFrameworkIds />
@@ -14,8 +12,9 @@
   </testPackage>
   <testFilters>
     <testFilter filterName="AutoSave" filterExpr="" />
+    <testFilter filterName="LastRun" filterExpr="" />
   </testFilters>
   <extensionSpecifications />
-  <reportDirectory>..\..\..\..\..\Program Files (x86)\Gallio\bin\Reports</reportDirectory>
+  <reportDirectory>..\..\..\AppData\Roaming\Gallio\Icarus\Reports</reportDirectory>
   <reportNameFormat>test-report-{0}-{1}</reportNameFormat>
 </testProject>
