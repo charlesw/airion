@@ -1,0 +1,1 @@
+git ls-files --deleted | xargs --replace=FILE git rm FILE
