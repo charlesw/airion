@@ -1,6 +1,18 @@
+﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
+# SharpDevelop 4.1.0.7387-alpha
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Main", "Main", "{61C31C55-3080-405B-A572-8D64CDFB6542}"
+	ProjectSection(SolutionItems) = postProject
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Airion.Common", "Main\Airion.Common\Airion.Common.csproj", "{AE263B2D-0000-0000-0000-000000000000}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Airion.Persist", "Main\Airion.Persist\Airion.Persist.csproj", "{B4481E16-0000-0000-0000-000000000000}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Airion.Persist.CQRS", "Main\Airion.Persist.CQRS\Airion.Persist.CQRS.csproj", "{1A075217-0000-0000-0000-000000000000}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Airion.Testing", "Main\Airion.Testing\Airion.Testing.csproj", "{E5D71392-0000-0000-0000-000000000000}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Files", "Files", "{36CE177D-05D2-40F1-8E22-C3C2D28BEDA1}"
 	ProjectSection(SolutionItems) = preProject
@@ -8,23 +20,17 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Files", "Files", "{36CE177D
 		./Airion.prebuild.xml = ./Airion.prebuild.xml
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Airion.Common", "..\Source\Main\Airion.Common\Airion.Common.csproj", "{AE263B2D-0000-0000-0000-000000000000}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Airion.Persist", "..\Source\Main\Airion.Persist\Airion.Persist.csproj", "{B4481E16-0000-0000-0000-000000000000}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Airion.Persist.CQRS", "..\Source\Main\Airion.Persist.CQRS\Airion.Persist.CQRS.csproj", "{1A075217-0000-0000-0000-000000000000}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Airion.Testing", "..\Source\Main\Airion.Testing\Airion.Testing.csproj", "{E5D71392-0000-0000-0000-000000000000}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{DB6F4B8F-9284-483D-986A-3BE40B88A1B7}"
+	ProjectSection(SolutionItems) = postProject
+	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Airion.Common.Tests", "..\Source\Tests\Airion.Common.Tests\Airion.Common.Tests.csproj", "{271F7878-0000-0000-0000-000000000000}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Airion.Common.Tests", "Tests\Airion.Common.Tests\Airion.Common.Tests.csproj", "{271F7878-0000-0000-0000-000000000000}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Airion.Persist.CQRS.Tests", "..\Source\Tests\Airion.Persist.CQRS.Tests\Airion.Persist.CQRS.Tests.csproj", "{3259EF0C-0000-0000-0000-000000000000}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Airion.Persist.CQRS.Tests", "Tests\Airion.Persist.CQRS.Tests\Airion.Persist.CQRS.Tests.csproj", "{3259EF0C-0000-0000-0000-000000000000}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Airion.Persist.Tests", "..\Source\Tests\Airion.Persist.Tests\Airion.Persist.Tests.csproj", "{0EF20B4D-0000-0000-0000-000000000000}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Airion.Persist.Tests", "Tests\Airion.Persist.Tests\Airion.Persist.Tests.csproj", "{0EF20B4D-0000-0000-0000-000000000000}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Airion.TestRunner", "..\Source\Tests\Airion.TestRunner\Airion.TestRunner.csproj", "{6BC43878-0000-0000-0000-000000000000}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Airion.TestRunner", "Tests\Airion.TestRunner\Airion.TestRunner.csproj", "{6BC43878-0000-0000-0000-000000000000}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -66,14 +72,14 @@ Global
 		{6BC43878-0000-0000-0000-000000000000}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{AE263B2D-0000-0000-0000-000000000000} = {61C31C55-3080-405B-A572-8D64CDFB6542}
-		{B4481E16-0000-0000-0000-000000000000} = {61C31C55-3080-405B-A572-8D64CDFB6542}
-		{1A075217-0000-0000-0000-000000000000} = {61C31C55-3080-405B-A572-8D64CDFB6542}
-		{E5D71392-0000-0000-0000-000000000000} = {61C31C55-3080-405B-A572-8D64CDFB6542}
 		{36CE177D-05D2-40F1-8E22-C3C2D28BEDA1} = {61C31C55-3080-405B-A572-8D64CDFB6542}
-		{271F7878-0000-0000-0000-000000000000} = {DB6F4B8F-9284-483D-986A-3BE40B88A1B7}
-		{3259EF0C-0000-0000-0000-000000000000} = {DB6F4B8F-9284-483D-986A-3BE40B88A1B7}
-		{0EF20B4D-0000-0000-0000-000000000000} = {DB6F4B8F-9284-483D-986A-3BE40B88A1B7}
+		{E5D71392-0000-0000-0000-000000000000} = {61C31C55-3080-405B-A572-8D64CDFB6542}
+		{1A075217-0000-0000-0000-000000000000} = {61C31C55-3080-405B-A572-8D64CDFB6542}
+		{B4481E16-0000-0000-0000-000000000000} = {61C31C55-3080-405B-A572-8D64CDFB6542}
+		{AE263B2D-0000-0000-0000-000000000000} = {61C31C55-3080-405B-A572-8D64CDFB6542}
 		{6BC43878-0000-0000-0000-000000000000} = {DB6F4B8F-9284-483D-986A-3BE40B88A1B7}
+		{0EF20B4D-0000-0000-0000-000000000000} = {DB6F4B8F-9284-483D-986A-3BE40B88A1B7}
+		{3259EF0C-0000-0000-0000-000000000000} = {DB6F4B8F-9284-483D-986A-3BE40B88A1B7}
+		{271F7878-0000-0000-0000-000000000000} = {DB6F4B8F-9284-483D-986A-3BE40B88A1B7}
 	EndGlobalSection
 EndGlobal

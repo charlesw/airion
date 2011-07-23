@@ -8,7 +8,7 @@ namespace Airion.TestRunner
 		public static void Main(string[] args)
 		{
 			var testFixture = new NHibernateConversationTests();
-			testFixture.Get_EntityDoesntExist_ReturnsNull();
+			testFixture.Save_EntityDoesntExists_EntityIsAddedAndIdIsAssigned();
 			
 		}
 	}

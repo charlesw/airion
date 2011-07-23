@@ -8,7 +8,9 @@ using Airion.Persist.Internal;
 using Airion.Persist.Provider;
 using Airion.Persist.Tests.Contracts;
 using Airion.Persist.Tests.Support;
-using FluentNHibernate.Cfg.Db;
+using Airion.Persist.Tests.Support.Domain;
+using NHibernate.Dialect;
+using NHibernate.Driver;
 using NUnit.Framework;
 using NHibernate;
 using NHibernate.Tool.hbm2ddl;
@@ -23,9 +25,12 @@ namespace Airion.Persist.Tests.Contract
 		protected override IConfiguration BuildConfiguration()
 		{
 			return new NHibernateConfiguration(provider => new TransientSessionAndTransactionManager(provider))
-				.Database(SQLiteConfiguration.Standard.InMemory())
-				.Mappings(x => x.FluentMappings
-				          .AddFromAssemblyOf<PersonMap>());
+				.Database(database => {
+					database.ConnectionString = @"Data Source=:memory:;Version=3;New=true"; // creates a Tempary database 
+					database.Driver<SQLite20Driver>();
+					database.Dialect<SQLiteDialect>();
+				})
+				.AddMapping<DomainMapping>("PersonModel");
 		}
 		
 		protected override void OnStoreCreate(Store store)

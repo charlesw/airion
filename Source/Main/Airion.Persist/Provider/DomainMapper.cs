@@ -11,7 +11,7 @@ using ConfOrm;
 using ConfOrm.NH;
 using NHibernate.Cfg.MappingSchema;
 
-namespace Airion.Persist.Tests.Support
+namespace Airion.Persist.Provider
 {
 	/// <summary>
 	/// Description of DomainMapper.

@@ -11,8 +11,8 @@
     <properties />
   </testPackage>
   <testFilters>
-    <testFilter filterName="AutoSave" filterExpr="" />
-    <testFilter filterName="LastRun" filterExpr="" />
+    <testFilter filterName="AutoSave" filterExpr="(Id: e50cfc65865e3c89 or Id: 53ecceaa5971e91f or (Id: b5d0d5c44d1a954b or Id: f6e6d627d248b69e or Id: 9c998ace4d6fcf5f or Id: 43d6698ff730f729 or Id: 422b324d632e31cb or Id: f245fe5c4ecf235c or Id: 7a4c0f338c90cd2f or Id: 626e27bff376f124 or Id: 3b7bd703e62c4cf6))" />
+    <testFilter filterName="LastRun" filterExpr="(Id: e50cfc65865e3c89 or Id: 53ecceaa5971e91f or (Id: b5d0d5c44d1a954b or Id: f6e6d627d248b69e or Id: 9c998ace4d6fcf5f or Id: 43d6698ff730f729 or Id: 422b324d632e31cb or Id: f245fe5c4ecf235c or Id: 7a4c0f338c90cd2f or Id: 626e27bff376f124 or Id: 3b7bd703e62c4cf6))" />
   </testFilters>
   <extensionSpecifications />
   <reportDirectory>..\..\..\AppData\Roaming\Gallio\Icarus\Reports</reportDirectory>

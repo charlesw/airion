@@ -59,9 +59,6 @@
 				<Reference name="System.Core"/>
 				<Reference name="System.Data" />		
 				
-				<Reference name="Castle.Core" path="../../Libraries/Castle.Core" localCopy="true" />
-				
-				
 				<Files>
 					<Match buildAction="Compile" pattern="*.cs" recurse="true"/>
 					<Match buildAction="None" pattern="*.config" recurse="false"/>

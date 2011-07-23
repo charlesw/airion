@@ -2,13 +2,13 @@
 // This code is distributed under the GNU LGPL (for details please see ~\Documentation\license.txt)
 
 using System;
+using System.Collections.Generic;
 using Airion.Common;
 using Airion.Persist.Internal;
 using Airion.Persist.Provider;
-using FluentNHibernate;
-using FluentNHibernate.Cfg;
-using FluentNHibernate.Cfg.Db;
 using NHibernate.Cfg;
+using NHibernate.Cfg.Loquacious;
+using NHibernate.Cfg.MappingSchema;
 
 namespace Airion.Persist.Provider
 {
@@ -19,8 +19,8 @@ namespace Airion.Persist.Provider
 	/// </summary>
 	public class NHibernateConfiguration : IConfiguration
 	{
-		private IPersistenceConfigurer _persistenceConfigurer;
-		private Action<MappingConfiguration> _mappings;
+		private Action<IDbIntegrationConfigurationProperties> _databaseIntegration;
+		private List<Tuple<HbmMapping, string>> _mappings = new List<Tuple<HbmMapping, string>>();
 		private ConversationStoreFactory _conversationStoreFactory;
 		private CreateSessionAndTransactionManager _createSessionAndTransactionManager;
 		
@@ -36,17 +36,27 @@ namespace Airion.Persist.Provider
 			_createSessionAndTransactionManager = createSessionAndTransactionManager;
 		}
 			
-		public NHibernateConfiguration Database(IPersistenceConfigurer persistenceConfigurer) 
+		public NHibernateConfiguration Database(Action<IDbIntegrationConfigurationProperties> databaseIntegration) 
 		{
-			_persistenceConfigurer = persistenceConfigurer;
+			_databaseIntegration = databaseIntegration;
 			return this;
 		}
 		
-		public NHibernateConfiguration Mappings(Action<MappingConfiguration> mappings)
+		public NHibernateConfiguration AddMapping(string modelName, HbmMapping mapping)
 		{
-			_mappings = mappings;
+			_mappings.Add(new Tuple<HbmMapping, string>(mapping, modelName));
 			return this;
 		}
+		
+		public NHibernateConfiguration AddMapping<TDomainMapping>(string modelName)
+			where TDomainMapping : class, IDomainMapping, new()
+		{
+			var domainMapper = new DomainMapper<TDomainMapping>();
+			var mapping = domainMapper.Map();
+			return AddMapping(modelName, mapping);
+		}
+		
+		
 		
 		public NHibernateConfiguration RegisterConversationStoreFactory(ConversationStoreFactory conversationStoreFactory)
 		{
@@ -63,11 +73,11 @@ namespace Airion.Persist.Provider
 		{
 			// NHibernate configuration
 			var nhConfig = new Configuration();
-			Fluently.Configure(nhConfig)
-				.Database(_persistenceConfigurer)
-				.Mappings(_mappings)
-				.BuildConfiguration();
-			
+			nhConfig.Proxy(x => x.ProxyFactoryFactory<NHibernate.ByteCode.LinFu.ProxyFactoryFactory>());
+			nhConfig.DataBaseIntegration(_databaseIntegration);
+			foreach(var mapping in _mappings) {
+				nhConfig.AddDeserializedMapping(mapping.Item1, mapping.Item2);
+			}
 			return new NHibernateProvider(nhConfig);
 		}
 		
